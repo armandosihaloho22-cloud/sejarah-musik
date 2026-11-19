@@ -1,0 +1,3981 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sejarah Musik Barat — Media Pembelajaran Interaktif</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <!-- Lucide Icons CDN (dengan fallback SVG internal jika offline) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+
+  <style>
+    /* ==========================================================================
+       1. VARIABEL TEMA "AURORA" & RESET DASAR
+       ========================================================================== */
+    :root {
+      --primary: #2dd4bf;
+      --secondary: #818cf8;
+      --accent: #f9a8d4;
+      --on-primary: #0b1020;
+
+      /* Default: Mode Gelap */
+      --bg: #08151c;
+      --surface: #112532;
+      --surface-2: #193444;
+      --text: #e8edf7;
+      --muted: #94a3b8;
+      --border: #204354;
+      --primary-text: #2dd4bf;
+      --glass-bg: rgba(17, 37, 50, 0.78);
+      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.35);
+      --glow-primary: 0 0 24px rgba(45, 212, 191, 0.35);
+      --glow-secondary: 0 0 24px rgba(129, 140, 248, 0.3);
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+    }
+
+    [data-theme="light"] {
+      --bg: #ebf5f8;
+      --surface: #ffffff;
+      --surface-2: #e0f0f3;
+      --text: #0f172a;
+      --muted: #5b6578;
+      --border: #cce6ea;
+      --primary-text: #1c8376;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.1);
+      --glow-primary: 0 6px 20px rgba(45, 212, 191, 0.25);
+      --glow-secondary: 0 6px 20px rgba(129, 140, 248, 0.2);
+      --success: #059669;
+      --warning: #d97706;
+      --danger: #dc2626;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    body {
+      min-height: 100dvh;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 12% 15%, rgba(45, 212, 191, 0.12), transparent 38%),
+        radial-gradient(circle at 88% 82%, rgba(129, 140, 248, 0.12), transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(249, 168, 212, 0.05), transparent 55%);
+    }
+
+    button, input, select {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* ==========================================================================
+       2. ANIMASI & PREFERS-REDUCED-MOTION
+       ========================================================================== */
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 18px rgba(45, 212, 191, 0.45), 0 0 36px rgba(129, 140, 248, 0.25); }
+      50% { box-shadow: 0 0 28px rgba(45, 212, 191, 0.75), 0 0 52px rgba(129, 140, 248, 0.45); }
+    }
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 48px; }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.92); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ==========================================================================
+       3. HALAMAN COVER (HOLOGRAM FUTURISTIK 100DVH)
+       ========================================================================== */
+    #cover-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem;
+      background: radial-gradient(ellipse at 50% 35%, #102a38 0%, #061017 75%);
+      color: #e8edf7;
+      overflow-y: auto;
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.6s;
+    }
+
+    [data-theme="light"] #cover-screen {
+      background: radial-gradient(ellipse at 50% 35%, #d6eff5 0%, #eaf6f9 75%);
+      color: #0f172a;
+    }
+
+    #cover-screen.hidden {
+      opacity: 0;
+      transform: scale(1.04);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Grid lantai perspektif hologram */
+    .holo-grid-floor {
+      position: absolute;
+      bottom: 0;
+      left: -20%;
+      right: -20%;
+      height: 44vh;
+      background-image:
+        linear-gradient(to right, rgba(45, 212, 191, 0.22) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(129, 140, 248, 0.22) 1px, transparent 1px);
+      background-size: 48px 48px;
+      transform: perspective(420px) rotateX(62deg);
+      transform-origin: bottom center;
+      mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 15%, transparent 95%);
+      -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 15%, transparent 95%);
+      animation: gridMove 3s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cover-topbar {
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(45, 212, 191, 0.14);
+      border: 1px solid rgba(45, 212, 191, 0.4);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--primary-text);
+      backdrop-filter: blur(8px);
+    }
+
+    .control-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      color: var(--primary-text);
+    }
+
+    .cover-center {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin: auto 0;
+    }
+
+    /* Kontainer Ilustrasi SVG + Cincin Hologram */
+    .holo-stage {
+      position: relative;
+      width: 240px;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .holo-ring {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .holo-ring-1 {
+      inset: 4px;
+      border: 2px dashed rgba(45, 212, 191, 0.55);
+      box-shadow: 0 0 24px rgba(45, 212, 191, 0.25);
+      animation: spinSlow 24s linear infinite;
+    }
+
+    .holo-ring-2 {
+      inset: 22px;
+      border: 2px solid rgba(129, 140, 248, 0.45);
+      border-top-color: var(--accent);
+      border-bottom-color: var(--primary);
+      animation: spinReverse 16s linear infinite;
+    }
+
+    .holo-svg-hero {
+      width: 176px;
+      height: 176px;
+      z-index: 2;
+      filter: drop-shadow(0 0 16px rgba(45, 212, 191, 0.45));
+      animation: floatY 4.5s ease-in-out infinite;
+    }
+
+    .cover-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--secondary);
+    }
+
+    .cover-title {
+      font-size: clamp(1.75rem, 4.4vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 55%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 36px rgba(45, 212, 191, 0.22);
+    }
+
+    .cover-form {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .input-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .cover-input {
+      width: 100%;
+      padding: 0.9rem 1.15rem;
+      border-radius: 16px;
+      background: var(--glass-bg);
+      border: 1.5px solid var(--border);
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cover-input:focus {
+      border-color: var(--primary);
+      box-shadow: var(--glow-primary);
+    }
+
+    .cover-error {
+      font-size: 0.85rem;
+      color: var(--danger);
+      font-weight: 600;
+      min-height: 1.25rem;
+    }
+
+    .btn-start {
+      width: 100%;
+      padding: 1rem 2rem;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--on-primary);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      animation: pulseGlow 3s infinite;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+    }
+
+    .btn-start:hover {
+      transform: translateY(-3px) scale(1.02);
+      filter: brightness(1.06);
+    }
+
+    .btn-start:active {
+      transform: scale(0.98);
+    }
+
+    .cover-footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding-top: 0.75rem;
+    }
+
+    .cover-footer strong {
+      color: var(--text);
+    }
+
+    /* ==========================================================================
+       4. APP SHELL & HEADER NAVIGASI
+       ========================================================================== */
+    #app-shell {
+      display: none;
+      flex-direction: column;
+      min-height: 100dvh;
+    }
+
+    #app-shell.active {
+      display: flex;
+    }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-bento-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-bento-home:hover, .btn-bento-home.active-menu {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--on-primary);
+      border-color: transparent;
+    }
+
+    .header-progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex: 1;
+      max-width: 340px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .progress-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary-text);
+      white-space: nowrap;
+    }
+
+    .volume-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0 0.6rem;
+      height: 44px;
+    }
+
+    .volume-slider {
+      width: 68px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Quick Nav Bar horizontal untuk akses cepat semua 11 menu */
+    .quick-nav {
+      max-width: 1200px;
+      margin: 0.65rem auto 0;
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      scrollbar-width: thin;
+    }
+
+    .nav-pill {
+      padding: 0.45rem 0.85rem;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 36px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-pill:hover {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    .nav-pill.active {
+      color: var(--on-primary);
+      background: var(--primary);
+      font-weight: 700;
+    }
+
+    .nav-pill .dot-done {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .nav-pill.active .dot-done {
+      background: var(--on-primary);
+    }
+
+    /* ==========================================================================
+       5. KONTEN UTAMA & BENTO GRID (BERANDA)
+       ========================================================================== */
+    .main-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3.5rem;
+      flex: 1;
+    }
+
+    .view-section {
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Bento Grid Layout */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(145px, auto);
+      gap: 1.1rem;
+    }
+
+    .bento-card {
+      position: relative;
+      border-radius: 22px;
+      padding: 1.35rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md), var(--glow-primary);
+    }
+
+    /* Ukuran Asimetris Bento Grid */
+    .bento-beranda {
+      grid-column: span 2;
+      grid-row: span 1;
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.16), rgba(129, 140, 248, 0.14)), var(--surface);
+      border-color: rgba(45, 212, 191, 0.4);
+    }
+    .bento-petunjuk { grid-column: span 1; grid-row: span 1; }
+    .bento-tujuan { grid-column: span 1; grid-row: span 1; }
+    .bento-materi {
+      grid-column: span 2;
+      grid-row: span 2;
+      background: linear-gradient(145deg, rgba(129, 140, 248, 0.2), rgba(45, 212, 191, 0.14)), var(--surface);
+      border-color: rgba(129, 140, 248, 0.5);
+    }
+    .bento-video { grid-column: span 1; grid-row: span 1; }
+    .bento-simulasi { grid-column: span 1; grid-row: span 1; }
+    .bento-kuis { grid-column: span 1; grid-row: span 1; }
+    .bento-game { grid-column: span 1; grid-row: span 1; }
+    .bento-asesmen {
+      grid-column: span 2;
+      grid-row: span 1;
+      background: linear-gradient(135deg, rgba(249, 168, 212, 0.14), rgba(129, 140, 248, 0.12)), var(--surface);
+    }
+    .bento-rangkuman { grid-column: span 1; grid-row: span 1; }
+    .bento-profil { grid-column: span 1; grid-row: span 1; }
+
+    .bento-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .bento-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-2);
+      color: var(--primary-text);
+      flex-shrink: 0;
+    }
+
+    .bento-materi .bento-icon {
+      width: 58px;
+      height: 58px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--on-primary);
+    }
+
+    .bento-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.28rem 0.65rem;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--primary-text);
+      border: 1px solid var(--border);
+    }
+
+    .bento-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      margin-top: 0.75rem;
+      color: var(--text);
+    }
+
+    .bento-materi .bento-title {
+      font-size: 1.5rem;
+    }
+
+    .bento-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 960px) {
+      .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .bento-beranda, .bento-materi, .bento-asesmen {
+        grid-column: span 2;
+      }
+      .bento-materi {
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-beranda, .bento-materi, .bento-asesmen,
+      .bento-petunjuk, .bento-tujuan, .bento-video,
+      .bento-simulasi, .bento-kuis, .bento-game,
+      .bento-rangkuman, .bento-profil {
+        grid-column: span 1;
+      }
+    }
+
+    /* ==========================================================================
+       6. KOMPONEN KARTU, TOMBOL, & LAYOUT HALAMAN
+       ========================================================================== */
+    .page-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-title-group h1 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .page-title-group p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.35rem;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--on-primary);
+      box-shadow: var(--glow-primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .btn-secondary {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary-text);
+    }
+
+    .btn-danger {
+      background: rgba(248, 113, 113, 0.16);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(45, 212, 191, 0.15);
+      color: var(--primary-text);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+    }
+
+    .badge-secondary {
+      background: rgba(129, 140, 248, 0.16);
+      color: var(--secondary);
+      border-color: rgba(129, 140, 248, 0.35);
+    }
+
+    /* ==========================================================================
+       7. PRESENTASI MATERI (8 SLIDE INTERAKTIF)
+       ========================================================================== */
+    .slide-stage {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 860px) {
+      .slide-stage {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .slide-visual-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+    }
+
+    .point-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin: 1rem 0;
+    }
+
+    .point-item {
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      background: var(--surface-2);
+      border-left: 4px solid var(--primary);
+      font-size: 0.95rem;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .point-item.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .context-box {
+      margin-top: 1rem;
+      padding: 1rem 1.15rem;
+      border-radius: 14px;
+      background: rgba(129, 140, 248, 0.12);
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      font-size: 0.92rem;
+    }
+
+    .slide-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ==========================================================================
+       8. VIDEO PEMBELAJARAN
+       ========================================================================== */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #000;
+      border: 1px solid var(--border);
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ==========================================================================
+       9. SIMULASI INTERAKTIF (MESIN WAKTU & SINTESIS ERA MUSIK BARAT)
+       ========================================================================== */
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 880px) {
+      .sim-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .era-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .era-chip {
+      padding: 0.65rem 0.5rem;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .era-chip.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--on-primary);
+      border-color: transparent;
+    }
+
+    #sim-canvas {
+      width: 100%;
+      height: 250px;
+      border-radius: 16px;
+      background: #061218;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-top: 0.9rem;
+    }
+
+    .slider-row label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .slider-row input[type="range"] {
+      width: 100%;
+      accent-color: var(--primary);
+      height: 8px;
+      cursor: pointer;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .metric-box {
+      padding: 0.85rem;
+      border-radius: 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+
+    .metric-box span {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .metric-box strong {
+      font-size: 1rem;
+      color: var(--primary-text);
+    }
+
+    /* ==========================================================================
+       10. KUIS & ASESMEN SUMATIF
+       ========================================================================== */
+    .option-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 0.95rem 1.15rem;
+      border-radius: 14px;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      transform: translateX(4px);
+    }
+
+    .option-btn.selected {
+      border-color: var(--secondary);
+      background: rgba(129, 140, 248, 0.18);
+    }
+
+    .option-btn.correct {
+      border-color: var(--success);
+      background: rgba(52, 211, 153, 0.18);
+    }
+
+    .option-btn.wrong {
+      border-color: var(--danger);
+      background: rgba(248, 113, 113, 0.18);
+      animation: shake 0.35s ease;
+    }
+
+    .feedback-banner {
+      margin-top: 1rem;
+      padding: 1rem 1.15rem;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      animation: popIn 0.3s ease;
+    }
+
+    .feedback-banner.ok {
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid var(--success);
+    }
+
+    .feedback-banner.no {
+      background: rgba(248, 113, 113, 0.15);
+      border: 1px solid var(--danger);
+    }
+
+    /* Navigasi Nomor Soal Asesmen */
+    .soal-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+
+    .soal-num-btn {
+      height: 44px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+    }
+
+    .soal-num-btn.current {
+      border-color: var(--primary);
+      box-shadow: var(--glow-primary);
+    }
+
+    .soal-num-btn.answered {
+      background: rgba(45, 212, 191, 0.22);
+      border-color: var(--primary);
+    }
+
+    .soal-num-btn.doubt {
+      background: rgba(251, 191, 36, 0.25);
+      border-color: var(--warning);
+    }
+
+    /* ==========================================================================
+       11. ZONA GAME (DUEL 2 PEMAIN & TEBAK KATA)
+       ========================================================================== */
+    .duel-arena {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 860px) {
+      .duel-arena {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .player-panel {
+      border-radius: 18px;
+      padding: 1.25rem;
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .player-1 { border-color: rgba(45, 212, 191, 0.5); }
+    .player-2 { border-color: rgba(249, 168, 212, 0.5); }
+
+    .duel-key-btn {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .duel-key-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      transform: scale(1.02);
+    }
+
+    .key-cap {
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary-text);
+    }
+
+    /* Tebak Kata */
+    .word-slots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1.25rem 0;
+    }
+
+    .letter-slot {
+      width: 42px;
+      height: 50px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border-bottom: 3px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .letter-slot.space {
+      border-bottom: none;
+      background: transparent;
+      width: 22px;
+    }
+
+    .v-keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.45rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .v-key {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-weight: 800;
+      font-size: 0.95rem;
+      transition: all 0.15s ease;
+    }
+
+    .v-key:hover:not(:disabled) {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .v-key:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .v-key.hit {
+      background: rgba(52, 211, 153, 0.25);
+      border-color: var(--success);
+      opacity: 1;
+    }
+
+    .v-key.miss {
+      background: rgba(248, 113, 113, 0.2);
+      border-color: var(--danger);
+    }
+
+    /* ==========================================================================
+       12. MODAL ONBOARDING & KONFIRMASI + PRINT STYLES
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(4, 10, 16, 0.78);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      max-width: 500px;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--primary);
+      border-radius: 24px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-md), var(--glow-primary);
+      animation: popIn 0.3s ease;
+    }
+
+    @media print {
+      #cover-screen, .app-header, .no-print {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       HALAMAN COVER (LAYAR PENUH 100DVH, HOLOGRAM FUTURISTIK)
+       ======================================================================== -->
+  <section id="cover-screen" aria-label="Halaman Pembuka Media Pembelajaran">
+    <div class="holo-grid-floor" aria-hidden="true"></div>
+
+    <div class="cover-topbar">
+      <div class="cover-badge">
+        <i data-lucide="sparkles" style="width:16px;height:16px;"></i>
+        <span>Seni Budaya · Fase F · Kelas XII</span>
+      </div>
+
+      <div class="control-pills">
+        <button type="button" class="icon-btn" id="cover-sound-toggle" aria-label="Aktifkan atau nonaktifkan suara">
+          <i data-lucide="volume-2"></i>
+        </button>
+        <button type="button" class="icon-btn" id="cover-theme-toggle" aria-label="Ganti mode terang atau gelap">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="cover-center">
+      <!-- Ilustrasi SVG Khusus & Relevan: Evolusi Musik Barat (Lira Kuno -> Partitur Klasik -> Gelombang Audio Modern) -->
+      <div class="holo-stage" aria-hidden="true">
+        <div class="holo-ring holo-ring-1"></div>
+        <div class="holo-ring holo-ring-2"></div>
+        <svg class="holo-svg-hero" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="auroraGrad" x1="20" y1="20" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2dd4bf" />
+              <stop offset="52%" stop-color="#818cf8" />
+              <stop offset="100%" stop-color="#f9a8d4" />
+            </linearGradient>
+            <linearGradient id="glowFill" x1="110" y1="30" x2="110" y2="190" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.28" />
+              <stop offset="100%" stop-color="#818cf8" stop-opacity="0.06" />
+            </linearGradient>
+          </defs>
+          <!-- Lingkaran Hologram Dasar -->
+          <circle cx="110" cy="110" r="92" fill="url(#glowFill)" stroke="url(#auroraGrad)" stroke-width="2" />
+          <!-- Garis Paranada Melengkung (Simbol Evolusi Zaman) -->
+          <path d="M24 134 C 65 104, 155 104, 196 134" stroke="#2dd4bf" stroke-width="1.6" stroke-opacity="0.75" />
+          <path d="M24 144 C 65 114, 155 114, 196 144" stroke="#818cf8" stroke-width="1.6" stroke-opacity="0.75" />
+          <path d="M24 154 C 65 124, 155 124, 196 154" stroke="#f9a8d4" stroke-width="1.6" stroke-opacity="0.75" />
+          <!-- Lira Yunani Kuno (Kiri - Musik Kuno) -->
+          <path d="M52 104 C 42 86, 44 64, 58 56 M82 104 C 92 86, 90 64, 76 56" stroke="#2dd4bf" stroke-width="3.2" stroke-linecap="round" />
+          <rect x="52" y="102" width="30" height="8" rx="4" fill="#2dd4bf" />
+          <line x1="56" y1="60" x2="78" y2="60" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round" />
+          <line x1="62" y1="60" x2="62" y2="102" stroke="#e8edf7" stroke-width="1.4" />
+          <line x1="67" y1="60" x2="67" y2="102" stroke="#e8edf7" stroke-width="1.4" />
+          <line x1="72" y1="60" x2="72" y2="102" stroke="#e8edf7" stroke-width="1.4" />
+          <!-- Kunci G / Treble Clef Futuristik (Tengah - Era Klasik & Romantik) -->
+          <path d="M112 162 C 118 162, 121 156, 118 151 C 114 146, 106 149, 108 155 M113 162 L 113 48 C 113 40, 123 40, 123 50 C 123 64, 98 76, 98 96 C 98 112, 124 114, 125 98 C 126 86, 111 84, 108 94"
+                stroke="url(#auroraGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+          <!-- Equalizer / Spektrum Frekuensi (Kanan - Era Modern/Kontemporer) -->
+          <rect x="142" y="84" width="5" height="24" rx="2.5" fill="#818cf8" />
+          <rect x="151" y="68" width="5" height="40" rx="2.5" fill="#2dd4bf" />
+          <rect x="160" y="76" width="5" height="32" rx="2.5" fill="#f9a8d4" />
+          <rect x="169" y="60" width="5" height="48" rx="2.5" fill="#2dd4bf" />
+          <rect x="178" y="80" width="5" height="28" rx="2.5" fill="#818cf8" />
+          <!-- Titik Partikel Cahaya -->
+          <circle cx="46" cy="44" r="3" fill="#2dd4bf" />
+          <circle cx="176" cy="42" r="3.5" fill="#f9a8d4" />
+          <circle cx="110" cy="24" r="3" fill="#818cf8" />
+        </svg>
+      </div>
+
+      <p class="cover-subtitle">Sejarah Musik Barat</p>
+      <h1 class="cover-title">Perkembangan Musik Barat dari Zaman Kuno Sampai Modern</h1>
+
+      <form class="cover-form" id="start-form" novalidate>
+        <div class="input-group">
+          <input
+            type="text"
+            id="student-name-input"
+            class="cover-input"
+            placeholder="Ketik Nama Lengkap Kamu di Sini..."
+            aria-label="Nama Siswa"
+            maxlength="50"
+            required
+          />
+        </div>
+        <div class="cover-error" id="cover-error-msg" role="alert"></div>
+        <button type="submit" class="btn-start" id="btn-start-app">
+          <span>Mulai Belajar</span>
+          <i data-lucide="arrow-right-circle"></i>
+        </button>
+      </form>
+    </div>
+
+    <footer class="cover-footer">
+      Disusun oleh <strong>Armando Sihaloho, S. Sn</strong> · <strong>SMA Swasta Santa Maria Kabanjahe</strong>
+    </footer>
+  </section>
+
+  <!-- ========================================================================
+       SHELL APLIKASI UTAMA (SINGLE PAGE APP + BENTO GRID)
+       ======================================================================== -->
+  <div id="app-shell">
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand-cluster">
+          <button type="button" class="btn-bento-home" id="btn-back-bento" data-route="beranda">
+            <i data-lucide="layout-grid" style="width:18px;height:18px;"></i>
+            <span>Menu Bento</span>
+          </button>
+          <div>
+            <div style="font-weight:800;font-size:0.95rem;line-height:1.2;">Sejarah Musik Barat</div>
+            <div style="font-size:0.75rem;color:var(--muted);" id="header-student-greeting">Halo, Siswa!</div>
+          </div>
+        </div>
+
+        <div class="header-progress-wrap" title="Progres Belajar Keseluruhan">
+          <div class="progress-track">
+            <div class="progress-fill" id="global-progress-bar"></div>
+          </div>
+          <span class="progress-label" id="global-progress-text">0%</span>
+        </div>
+
+        <div class="control-pills">
+          <div class="volume-control">
+            <button type="button" id="app-sound-toggle" aria-label="Suara On atau Off" style="min-width:34px;min-height:34px;display:inline-flex;align-items:center;justify-content:center;">
+              <i data-lucide="volume-2" style="width:18px;height:18px;"></i>
+            </button>
+            <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.05" value="0.6" aria-label="Pengatur Volume Suara" />
+          </div>
+          <button type="button" class="icon-btn" id="app-theme-toggle" aria-label="Ganti Tema Terang atau Gelap">
+            <i data-lucide="sun" style="width:18px;height:18px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigasi Cepat Horizontal 11 Menu -->
+      <nav class="quick-nav" id="quick-nav-bar" aria-label="Navigasi Utama Pembelajaran"></nav>
+    </header>
+
+    <main class="main-container" id="main-content" tabindex="-1"></main>
+  </div>
+
+  <!-- ========================================================================
+       MODAL ONBOARDING TUR SINGKAT & KONFIRMASI
+       ======================================================================== -->
+  <div class="modal-backdrop" id="onboarding-modal" role="dialog" aria-modal="true" aria-labelledby="onboard-title">
+    <div class="modal-card">
+      <div class="badge" style="margin-bottom:0.75rem;">
+        <i data-lucide="compass" style="width:14px;height:14px;"></i>
+        <span id="onboard-step-badge">Langkah 1 dari 3</span>
+      </div>
+      <h2 id="onboard-title" style="font-size:1.35rem;font-weight:800;margin-bottom:0.5rem;">Selamat Datang di Ruang Eksplorasi Musik!</h2>
+      <p id="onboard-desc" style="color:var(--muted);font-size:0.95rem;margin-bottom:1.25rem;">
+        Gunakan tampilan <strong>Menu Bento Grid</strong> untuk menjelajahi 11 modul belajar secara runtut, mulai dari Tujuan, Materi 8 Slide, Simulasi Era Musik, hingga Asesmen Sumatif.
+      </p>
+      <div style="display:flex;justify-content:space-between;gap:0.75rem;">
+        <button type="button" class="btn btn-secondary" id="onboard-skip">Lewati Tur</button>
+        <button type="button" class="btn btn-primary" id="onboard-next">Lanjut</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+    <div class="modal-card">
+      <h2 id="confirm-title" style="font-size:1.25rem;font-weight:800;margin-bottom:0.5rem;">Kumpulkan Jawaban Asesmen?</h2>
+      <p id="confirm-desc" style="color:var(--muted);font-size:0.95rem;margin-bottom:1.25rem;">
+        Pastikan semua soal sudah kamu periksa. Setelah dikumpulkan, skor dan analisis ketuntasan KKTP (75) akan langsung ditampilkan.
+      </p>
+      <div style="display:flex;justify-content:flex-end;gap:0.75rem;">
+        <button type="button" class="btn btn-secondary" id="confirm-cancel">Periksa Lagi</button>
+        <button type="button" class="btn btn-primary" id="confirm-ok">Ya, Kumpulkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       JAVASCRIPT UTAMA (DATA MODULAR, AUDIO ENGINE, STATE, & RENDERER)
+       ======================================================================== -->
+  <script>
+    /* ========================================================================
+       BAGIAN A: DATA KONTEN PEMBELAJARAN (MUDAH DIEDIT GURU)
+       Disusun akurat dari sumber: "Materi Sejarah Musik Barat" & Kurikulum Merdeka
+       ======================================================================== */
+    const MEDIA_IDENTITY = {
+      mapel: "Seni Budaya",
+      fase: "Fase F — Kelas XI–XII SMA/SMK/MA (Kelas XII)",
+      kurikulum: "Kurikulum Merdeka + Pembelajaran Mendalam (Deep Learning)",
+      materiPokok: "Sejarah Musik Barat",
+      subMateri: "Perkembangan Musik Barat dari Zaman Kuno Sampai Modern",
+      alokasiWaktu: "2 x 45 Menit",
+      penyusun: "Armando Sihaloho, S. Sn",
+      sekolah: "SMA Swasta Santa Maria Kabanjahe",
+      kktp: 75
+    };
+
+    const TUJUAN_PEMBELAJARAN = [
+      {
+        kode: "TP1",
+        judul: "Memahami Perjalanan Sejarah Musik Barat Hingga Saat Ini",
+        deskripsi: "Peserta didik mampu mengerti bagaimana perjalanan musik Barat berkembang dari Zaman Kuno, Abad Pertengahan, Renaisans, Barok & Rokoko, Klasik, Romantik, hingga Era Modern/Kontemporer beserta karakteristik dan konteksnya dalam kehidupan masa kini.",
+        dimensiProfil: ["Bernalar Kritis", "Kreatif", "Berkebinekaan Global"],
+        pengalamanBelajar: "Memahami kronologi era → Mengaplikasi analisis karakter bunyi di simulasi → Merefleksi pengaruhnya pada musik modern yang didengar sehari-hari."
+      }
+    ];
+
+    const MENU_ITEMS = [
+      { id: "beranda", label: "Beranda", icon: "home", desc: "Sapaan personal & ringkasan progres" },
+      { id: "petunjuk", label: "Petunjuk", icon: "help-circle", desc: "Panduan navigasi & fungsi tombol" },
+      { id: "tujuan", label: "Tujuan", icon: "target", desc: "Capaian TP1 & alur belajar" },
+      { id: "materi", label: "Materi", icon: "book-open", desc: "8 Slide interaktif perjalanan musik Barat" },
+      { id: "video", label: "Video", icon: "play-circle", desc: "Tayangan referensi & refleksi" },
+      { id: "simulasi", label: "Simulasi", icon: "sliders", desc: "Mesin Waktu & Sintesis Era Musik" },
+      { id: "kuis", label: "Kuis", icon: "check-square", desc: "10 soal latihan & umpan balik instan" },
+      { id: "game", label: "Game", icon: "gamepad-2", desc: "Duel 2 Pemain & Tebak Kata" },
+      { id: "asesmen", label: "Asesmen", icon: "award", desc: "Evaluasi sumatif 10 soal (20 menit)" },
+      { id: "rangkuman", label: "Rangkuman", icon: "layers", desc: "Intisari 7 zaman musik Barat" },
+      { id: "profil", label: "Profil", icon: "user-check", desc: "Identitas penyusun & sekolah" }
+    ];
+
+    /* 8 SLIDE PRESENTASI MATERI (LENGKAP SESUAI DOKUMEN SUMBER) */
+    const MATERI_SLIDES = [
+      {
+        nomor: 1,
+        era: "Pengantar & Musik Kuno (Sebelum 476 M)",
+        judul: "Akar Peradaban Musik Barat: Zaman Kuno",
+        ringkasan: "Perjalanan musik Barat terbagi dalam tiga garis besar utama: Musik Kuno (sebelum 476 M), Musik Klasik Barat (Abad Pertengahan hingga Romantik), dan Musik Modern/Abad ke-20 (1900–sekarang). Pada Zaman Kuno sebelum keruntuhan Kekaisaran Romawi Barat tahun 476 M, musik menyatu erat dengan ritual keagamaan, mitologi, drama Yunani, dan upacara kenegaraan.",
+        poin: [
+          "Periodisasi besar musik Barat: Musik Kuno (< 476 M), Musik Klasik Barat (476–1910 M), dan Musik Modern/Kontemporer (1900–sekarang).",
+          "Peradaban Yunani dan Romawi Kuno meletakkan dasar teori tangga nada (modus) serta hubungan antara matematika dan getaran bunyi.",
+          "Instrumen petik seperti Lira (Lyre) dan Kithara serta instrumen tiup Aulos mendominasi pengiring puisi dan teater."
+        ],
+        konteks: "Bayangkan soundtrack film kolosal atau upacara pembukaan Olimpiade modern—akar kemegahan fanfare dan paduan suara epiknya berawal dari tradisi teater dan ritual Yunani-Romawi Kuno.",
+        svgType: "kuno"
+      },
+      {
+        nomor: 2,
+        era: "Musik Klasik Barat · A. Abad Pertengahan (476 – 1572 M)",
+        judul: "Musik Era Abad Pertengahan: Gregorian & Sekuler",
+        ringkasan: "Dimulai sejak runtuhnya Kerajaan Romawi (476 M) hingga era Reformasi Kristen oleh Martin Luther (1572 M). Musik bermula di gereja Roma melalui misa dan ibadat para biarawan/biarawati, sebelum berkembang pula menjadi musik sekuler di luar gereja.",
+        poin: [
+          "Musik Sakral (Plainchant / Musik Polos): Vokal monofoni berbahasa Latin tanpa iringan (non-metrikal), dipopulerkan Santo Gregorius Agung (590–604 M) sebagai Musik Gregorian.",
+          "Menggunakan tangga nada (modus) gerejawi: Dorian, Phrygian, Lydian, dan Mixolydian dengan gaya Recitative (sederhana) dan Melismatis (rumit); tahun 1100 orgel pipa mulai dipakai di gereja.",
+          "Musik Sekuler: Dikenal lewat penyair keliling Troubadours (Prancis Selatan), Trouvères (Prancis Utara), dan Minnesinger (Jerman & Austria) bertema kepahlawanan, romantisme, dan Lamentatio.",
+          "Tokoh & Karya: S. Gregorius Agung, S. Hildegard (1098–1179), Guillaume de Machaut (1300–1377); lagu terkenal: Alba (nyanyian pagi), Pastourelle (nyanyian gembala), dan Estampie (musik dansa)."
+        ],
+        konteks: "Saat kamu mendengar lantunan vokal tunggal tanpa alat musik yang menggema khidmat di gereja atau adegan biara dalam film sejarah, itulah warna khas tekstur monofoni Gregorian.",
+        svgType: "pertengahan"
+      },
+      {
+        nomor: 3,
+        era: "Musik Klasik Barat · B. Era Renaisans (1400 – 1600 M)",
+        judul: "Era Renaisans: Kelahiran Kembali & Humanisme",
+        ringkasan: "Berasal dari kata Re (kembali) dan Naitre (lahir) yang bermakna 'Kelahiran Kembali'. Bermula di Italia lalu menyebar ke seluruh Eropa, gerakan ini menghidupkan kembali kebudayaan Yunani dan Romawi Kuno seiring meningkatnya pemikiran rasional dan humanisme.",
+        poin: [
+          "Zaman Humanisme: Manusia berpikir lebih luas dan rasional sehingga tema lagu tidak lagi terbatas pada gereja Katolik, melainkan meluas ke tema kehidupan sehari-hari dan gereja Protestan.",
+          "Musik vokal polifonik dianggap jauh lebih penting dan mencapai puncak kejernihan paduan suara.",
+          "Mulai muncul pengelompokan instrumen musik secara sistematis: Brass (tiup logam), Percussion (perkusi), Woodwind (tiup kayu), dan Strings (gesek/petik).",
+          "Lima komponis terkenal: Giovanni Pierluigi da Palestrina, William Byrd, Orlando de Lassus, Tomás Luis de Victoria, dan Johannes Ockeghem."
+        ],
+        konteks: "Pengelompokan instrumen orkestra modern menjadi Strings, Woodwind, Brass, dan Percussion yang kamu lihat di konser simfoni masa kini berakar langsung dari penataan era Renaisans.",
+        svgType: "renaisans"
+      },
+      {
+        nomor: 4,
+        era: "Musik Klasik Barat · C. Era Barok & Rokoko (1600 – 1750 M)",
+        judul: "Era Barok & Rokoko: Dramatik, Ornamen, & Harpsichord",
+        ringkasan: "Kata 'Baroque' dari bahasa Prancis awalnya bermakna bentuk tidak wajar/ganjil, namun dalam seni berarti Agung, Dramatik, dan penuh Spirit. Dipengaruhi hiasan arsitektur megah, musik Barok sarat detail dan ornamen, lalu berlanjut ke periode akhir Rokoko sebagai simbol gengsi bangsawan.",
+        poin: [
+          "Periode awal Barok menonjolkan unsur dramatik dalam Opera dan Oratorio; periode kedua menonjolkan unsur harmonik dan polifonik dengan bentuk Sonata dan Concerto.",
+          "Mulai diterapkan kontras dinamika keras (forte) dan lembut (piano), tangga nada mayor-minor mulai digunakan, namun piano modern belum ditemukan (masih memakai Harpsichord).",
+          "Ornamen musik pada era Barok berupa improvisasi spontan (tidak ditulis), sedangkan pada era Rokoko ditulis lengkap dalam partitur; kreativitas komponis masih terikat aturan gereja (sistem patronase).",
+          "Karya terkenal: Dido and Aeneas (Henry Purcell), The Four Seasons (Antonio Vivaldi), dan Messiah (George Frideric Handel)."
+        ],
+        konteks: "Melodi 'Spring' dari The Four Seasons karya Vivaldi sering kamu dengar sebagai musik latar iklan elegan atau nada tunggu telepon—contoh nyata alur melodi Barok yang berpola dan detail.",
+        svgType: "barok"
+      },
+      {
+        nomor: 5,
+        era: "Musik Klasik Barat · D. Era Klasik (1750 – 1820 M)",
+        judul: "Era Klasik: Keseimbangan, Kejernihan, & Lahirnya Piano",
+        ringkasan: "Berlangsung pada masa Pencerahan (Enlightenment) ketika pertunjukan musik mulai terbuka untuk kaum pedagang dan rakyat biasa, bukan hanya bangsawan. Komposisi dibuat lebih jernih, elegan, terstruktur, dan seimbang.",
+        poin: [
+          "Karakter utama berupa tekstur homofonik (melodi utama di atas iringan akord 3 nada/triad) serta modulasi yang terkontrol rapi.",
+          "Perubahan dinamika bertahap (Crescendo–Decrescendo) dan perubahan tempo (Accelerando–Ritardando) berkembang sempurna, sementara ornamen berlebihan dibatasi.",
+          "Alat musik Piano sudah menggantikan Harpsichord karena mampu menghasilkan variasi keras-lembut sentuhan jari.",
+          "Karya terkenal: Moonlight Sonata (Ludwig van Beethoven), The Creation (Joseph Haydn), dan Ave Maria (Franz Schubert)."
+        ],
+        konteks: "Struktur lagu pop modern yang memiliki melodi vokal utama di atas iringan akord gitar/keyboard (tekstur homofonik) mewarisi prinsip kejernihan era Klasik.",
+        svgType: "klasik"
+      },
+      {
+        nomor: 6,
+        era: "Musik Klasik Barat · E. Era Romantik (1815 – 1910 M)",
+        judul: "Era Romantik: Kebebasan Emosi & Orkestra Raksasa",
+        ringkasan: "Disebut Romantik karena komposisi musiknya jauh lebih bergairah, ekspresif, dan mengutamakan kebebasan imajinasi serta curahan emosi pribadi komponis tanpa terikat aturan kaku.",
+        poin: [
+          "Ukuran orkestra berkembang menjadi sangat besar (raksasa) dengan variasi durasi karya dari pendek hingga panjang dan ending yang spektakuler serta dramatis.",
+          "Segi bentuk masih mempertahankan pola Klasik namun diperluas; segi harmoni menggunakan nada-nada kromatik yang kaya; segi ritmik dan tempo diolah detail sebagai ungkapan rasa.",
+          "Muncul era pemain berteknik sangat tinggi (virtuoso) khususnya pada instrumen piano dan biola.",
+          "Karya terkenal: Symphony No. 9 (Ludwig van Beethoven) dan Hungarian Dances / Danas Hungaras (Johannes Brahms)."
+        ],
+        konteks: "Musik latar film-film epik seperti Star Wars atau Lord of the Rings yang penuh ketegangan emosional dan dentuman orkestra raksasa sangat kental mewarisi gaya era Romantik.",
+        svgType: "romantik"
+      },
+      {
+        nomor: 7,
+        era: "Musik Modern / Kontemporer (1900 – Sekarang)",
+        judul: "Musik Modern & Kontemporer: Emansipasi Bunyi",
+        ringkasan: "Dimulai sekitar tahun 1900 hingga sekarang, ditandai sikap emansipatif—keinginan membebaskan diri dari segala belenggu aturan tradisional. Dipengaruhi industrialisasi, teknologi audiovisual, dan pertemuan lintas budaya dunia.",
+        poin: [
+          "Harmoni lepas dari sistem tonal konvensional, banyak modulasi, birama berganti-ganti, dinamika dan tempo tidak lazim, serta bunyi dapat berasal dari sumber non-instrumen.",
+          "Gaya utama meliputi Impresionisme, Ekspresionisme, dan Eksperimental; suasana musik sering terdengar eksotis, misterius, dan penuh ketegangan.",
+          "Penggunaan tangga nada pentatonik membuat ukuran orkestra kembali mengecil; instrumen lintas etnis berpadu seperti piano, biola, gitar dengan gamelan, angklung, kolintang, sasando, dan talempong.",
+          "Kemajuan teknologi audiovisual menghubungkan musik antarnegara sehingga musik etnis Nusantara dan musik Barat saling memengaruhi."
+        ],
+        konteks: "Ketika musisi Indonesia memadukan bunyi gamelan, sasando, atau angklung dengan synthesizer dan beat elektronik di panggung internasional, itulah wujud nyata musik kontemporer.",
+        svgType: "modern"
+      },
+      {
+        nomor: 8,
+        era: "Sintesis Perjalanan Musik Barat",
+        judul: "Ringkasan Evolusi: Dari Ritual ke Eksplorasi Global",
+        ringkasan: "Perjalanan musik Barat mencerminkan perubahan cara berpikir manusia: dari kepatuhan religius di Abad Pertengahan, rasionalitas Renaisans, kemegahan Barok, keseimbangan Klasik, luapan emosi Romantik, hingga kebebasan tanpa batas di Era Modern.",
+        poin: [
+          "Tekstur berevolusi dari Monofoni (Abad Pertengahan) → Polifoni (Renaisans & Barok) → Homofoni (Klasik & Romantik) → Bebas/Eksperimental (Modern).",
+          "Instrumen kunci bergeser dari Vokal & Lira → Orgel Pipa → Harpsichord → Piano & Orkestra Raksasa → Instrumen Etnis & Teknologi Audiovisual.",
+          "Fungsi musik meluas dari sarana ibadat gereja → hiburan & gengsi bangsawan → konser publik rakyat → ekspresi bebas global lintas budaya."
+        ],
+        konteks: "Memahami sejarah musik Barat membantu kita menjadi pendengar dan kreator musik yang sadar akar sejarah sekaligus terbuka berinovasi.",
+        svgType: "sintesis"
+      }
+    ];
+
+    /* DATA SIMULASI INTERAKTIF: MESIN WAKTU & SINTESIS ERA MUSIK BARAT */
+    const SIMULATION_ERAS = [
+      {
+        id: "kuno",
+        nama: "Zaman Kuno",
+        tahun: "< 476 M",
+        tekstur: "Monofoni Ritual",
+        instrumen: "Lira, Kithara, Aulos",
+        harmoni: "Modus Yunani Awal",
+        baseFreq: 220,
+        harmonics: [1],
+        tempoDefault: 72,
+        kompleksitasDefault: 15,
+        warna: "#2dd4bf",
+        deskripsi: "Melodi tunggal sederhana pengiring syair dan drama Yunani-Romawi."
+      },
+      {
+        id: "pertengahan",
+        nama: "Abad Pertengahan",
+        tahun: "476–1572 M",
+        tekstur: "Monofoni Gregorian",
+        instrumen: "Vokal Latin & Orgel Pipa",
+        harmoni: "Modus Gerejawi (Dorian–Mixolydian)",
+        baseFreq: 246.94,
+        harmonics: [1, 1.5],
+        tempoDefault: 66,
+        kompleksitasDefault: 25,
+        warna: "#38bdf8",
+        deskripsi: "Plainchant non-metrikal khidmat di gereja serta lagu Troubadours."
+      },
+      {
+        id: "renaisans",
+        nama: "Renaisans",
+        tahun: "1400–1600 M",
+        tekstur: "Polifoni Vokal",
+        instrumen: "Paduan Suara, Brass, Woodwind, Strings",
+        harmoni: "Konsonansi Polifonik",
+        baseFreq: 261.63,
+        harmonics: [1, 1.25, 1.5],
+        tempoDefault: 92,
+        kompleksitasDefault: 45,
+        warna: "#818cf8",
+        deskripsi: "Suara vokal berlapis yang saling menjalin secara harmonis dan humanis."
+      },
+      {
+        id: "barok",
+        nama: "Barok & Rokoko",
+        tahun: "1600–1750 M",
+        tekstur: "Polifoni & Kontras Dramatik",
+        instrumen: "Harpsichord, Biola, Orgel",
+        harmoni: "Mayor-Minor Awal & Ornamen",
+        baseFreq: 293.66,
+        harmonics: [1, 1.25, 1.5, 2],
+        tempoDefault: 112,
+        kompleksitasDefault: 68,
+        warna: "#a78bfa",
+        deskripsi: "Kontras forte-piano, alur berpola detail, dan hiasan melodi yang kaya."
+      },
+      {
+        id: "klasik",
+        nama: "Era Klasik",
+        tahun: "1750–1820 M",
+        tekstur: "Homofoni Seimbang",
+        instrumen: "Piano & Orkestra Klasik",
+        harmoni: "Akord 3 Nada (Triad) Jernih",
+        baseFreq: 329.63,
+        harmonics: [1, 1.25, 1.5],
+        tempoDefault: 120,
+        kompleksitasDefault: 52,
+        warna: "#34d399",
+        deskripsi: "Melodi elegan di atas iringan akord dengan dinamika crescendo-decrescendo."
+      },
+      {
+        id: "romantik",
+        nama: "Era Romantik",
+        tahun: "1815–1910 M",
+        tekstur: "Homofoni Ekspresif Raksasa",
+        instrumen: "Orkestra Raksasa & Virtuoso Piano",
+        harmoni: "Nada Kromatik Penuh Gairah",
+        baseFreq: 349.23,
+        harmonics: [1, 1.189, 1.498, 1.781, 2],
+        tempoDefault: 132,
+        kompleksitasDefault: 82,
+        warna: "#f9a8d4",
+        deskripsi: "Ledakan emosi, nada kromatik, dan klimaks orkestra yang dramatis."
+      },
+      {
+        id: "modern",
+        nama: "Modern / Kontemporer",
+        tahun: "1900–Sekarang",
+        tekstur: "Bebas & Eksperimental",
+        instrumen: "Piano, Gamelan, Sasando, Elektronik",
+        harmoni: "Atonal, Pentatonik & Sintesis",
+        baseFreq: 392.0,
+        harmonics: [1, 1.122, 1.414, 1.681, 2.15],
+        tempoDefault: 140,
+        kompleksitasDefault: 95,
+        warna: "#fbbf24",
+        deskripsi: "Emansipasi bunyi bebas aturan tonal serta perpaduan musik lintas etnis."
+      }
+    ];
+
+    /* 10 SOAL KUIS INTERAKTIF (CAMPURAN: PG, BENAR/SALAH, ISIAN SINGKAT) — SEMUA BERTAG TP1 */
+    const KUIS_QUESTIONS = [
+      {
+        id: "K1",
+        tp: "TP1",
+        type: "pg",
+        question: "Musik sakral pada Era Abad Pertengahan yang berupa nyanyian vokal monofoni berbahasa Latin tanpa iringan alat musik dikenal dengan sebutan...",
+        options: [
+          "Musik Gregorian (Plainchant)",
+          "Oratorio Barok",
+          "Sonata Homofonik",
+          "Simfoni Kromatik"
+        ],
+        answer: 0,
+        explanation: "Musik Gregorian (dipopulerkan Paus Santo Gregorius Agung, 590–604 M) adalah musik vokal monofoni polos (plainchant) berbahasa Latin tanpa iringan instrumen."
+      },
+      {
+        id: "K2",
+        tp: "TP1",
+        type: "bs",
+        question: "Pernyataan: Pada era Renaisans (1400–1600 M), tema lagu mulai bergeser dari yang semula hanya berpusat pada gereja Katolik menjadi mencakup tema kehidupan sehari-hari dan gereja Protestan seiring berkembangnya pemikiran humanisme.",
+        options: ["Benar", "Salah"],
+        answer: 0,
+        explanation: "Benar! Era Renaisans dikenal sebagai zaman Humanisme di mana manusia berpikir lebih rasional dan luas sehingga tema musik berkembang ke tema kehidupan serta gereja Protestan."
+      },
+      {
+        id: "K3",
+        tp: "TP1",
+        type: "pg",
+        question: "Instrumen tuts yang menjadi cikal bakal piano dan banyak digunakan pada Era Barok (1600–1750 M) sebelum piano modern ditemukan adalah...",
+        options: [
+          "Orgel Pipa",
+          "Harpsichord",
+          "Lira Yunani",
+          "Sinthesizer Analog"
+        ],
+        answer: 1,
+        explanation: "Pada era Barok piano belum ditemukan, sehingga komponis memakai Harpsichord (senarnya dipetik mekanis, bukan dipukul palu seperti piano)."
+      },
+      {
+        id: "K4",
+        tp: "TP1",
+        type: "isian",
+        question: "Isian Singkat: Kata 'Renaisans' berasal dari bahasa Prancis 'Re' dan 'Naitre' yang berarti...",
+        acceptedAnswers: ["kelahiran kembali", "lahir kembali"],
+        placeholder: "Ketik 2 kata jawabanmu...",
+        explanation: "Re = kembali, Naitre = lahir, sehingga Renaisans berarti 'Kelahiran Kembali' (kebudayaan Yunani dan Romawi Kuno)."
+      },
+      {
+        id: "K5",
+        tp: "TP1",
+        type: "pg",
+        question: "Perbedaan perlakuan ornamen (hiasan musik) antara Era Barok dan periode akhirnya yaitu Era Rokoko terletak pada...",
+        options: [
+          "Ornamen Barok hanya dimainkan perkusi, sedangkan Rokoko dimainkan vokal",
+          "Ornamen Barok berupa improvisasi spontan tidak tertulis, sedangkan Rokoko ditulis di partitur",
+          "Ornamen Barok dilarang gereja, sedangkan Rokoko wajib memakai gamelan",
+          "Ornamen Barok memakai piano modern, sedangkan Rokoko memakai lira"
+        ],
+        answer: 1,
+        explanation: "Pada era Barok, hiasan musik (ornamen) dilakukan secara improvisasi spontan oleh pemain tanpa ditulis, sedangkan pada masa Rokoko ornamen ditulis lengkap dalam partitur."
+      },
+      {
+        id: "K6",
+        tp: "TP1",
+        type: "bs",
+        question: "Pernyataan: Pada Era Klasik (1750–1820 M), komposisi musik dibuat sangat rumit dengan ukuran orkestra raksasa agar hanya bisa dinikmati oleh kalangan bangsawan istana.",
+        options: ["Benar", "Salah"],
+        answer: 1,
+        explanation: "Salah! Justru pada Era Klasik (Masa Pencerahan), komposisi dibuat lebih sederhana, jernih, dan homofonik agar dapat dinikmati pula oleh kaum pedagang dan rakyat kecil."
+      },
+      {
+        id: "K7",
+        tp: "TP1",
+        type: "pg",
+        question: "Manakah pasangan komponis dan karya terkenal dari Era Barok yang paling tepat?",
+        options: [
+          "Ludwig van Beethoven — Moonlight Sonata",
+          "Antonio Vivaldi — The Four Seasons",
+          "Johannes Brahms — Hungarian Dances",
+          "Joseph Haydn — The Creation"
+        ],
+        answer: 1,
+        explanation: "Antonio Vivaldi (The Four Seasons), George Frideric Handel (Messiah), dan Henry Purcell (Dido and Aeneas) adalah tokoh besar Era Barok."
+      },
+      {
+        id: "K8",
+        tp: "TP1",
+        type: "pg",
+        question: "Ciri khas harmoni dan ukuran orkestra pada Era Romantik (1815–1910 M) adalah...",
+        options: [
+          "Tangga nada pentatonik dengan orkestra sangat kecil",
+          "Modus gerejawi tanpa iringan alat musik",
+          "Penggunaan nada kromatik yang ekspresif dengan ukuran orkestra raksasa",
+          "Harmoni atonal lepas dari sistem tonal sama sekali"
+        ],
+        answer: 2,
+        explanation: "Era Romantik mengembangkan harmoni klasik dengan nada kromatik untuk ekspresi emosi mendalam serta memperbesar orkestra hingga ukuran raksasa."
+      },
+      {
+        id: "K9",
+        tp: "TP1",
+        type: "isian",
+        question: "Isian Singkat: Penyair sekaligus musisi keliling pada Abad Pertengahan di wilayah Prancis Selatan yang membawakan lagu sekuler bertema kepahlawanan dan romantisme disebut...",
+        acceptedAnswers: ["troubadours", "troubadour"],
+        placeholder: "Ketik nama kelompok musisi tersebut...",
+        explanation: "Musisi keliling era Abad Pertengahan dikenal sebagai Troubadours (Prancis Selatan), Trouvères (Prancis Utara), dan Minnesinger (Jerman & Austria)."
+      },
+      {
+        id: "K10",
+        tp: "TP1",
+        type: "pg",
+        question: "Sikap 'emansipatif' pada Musik Modern/Kontemporer (1900–sekarang) tampak pada ciri berikut, KECUALI...",
+        options: [
+          "Harmoni lepas dari sistem tonal dan tidak terpaku pada satu birama",
+          "Sumber bunyi dapat berasal dari benda di luar instrumen musik konvensional",
+          "Perpaduan instrumen Barat dengan instrumen etnis seperti gamelan, angklung, dan sasando",
+          "Kreativitas komponis dibatasi ketat oleh sistem patronase gereja"
+        ],
+        answer: 3,
+        explanation: "Pembatasan kreativitas oleh sistem patronase gereja terjadi pada era Barok/Abad Pertengahan, sedangkan Era Modern bersifat emansipatif (bebas dari belenggu aturan)."
+      }
+    ];
+
+    /* DATA GAME 1: DUEL 2 PEMAIN (10 RONDE) */
+    const DUEL_QUESTIONS = [
+      { q: "Musik vokal polos monofoni tanpa iringan pada Abad Pertengahan disebut...", opts: ["Gregorian", "Oratorio", "Sonata", "Simfoni"], ans: 0 },
+      { q: "Era kelahiran kembali budaya Yunani-Romawi (1400–1600 M) adalah...", opts: ["Barok", "Renaisans", "Romantik", "Klasik"], ans: 1 },
+      { q: "Cikal bakal alat musik piano yang dipakai pada Era Barok adalah...", opts: ["Lira", "Orgel Pipa", "Harpsichord", "Gamelan"], ans: 2 },
+      { q: "Komponis pencipta karya 'The Four Seasons' pada era Barok adalah...", opts: ["Vivaldi", "Haydn", "Brahms", "Schubert"], ans: 0 },
+      { q: "Tekstur melodi utama di atas iringan akord 3 nada ciri Era Klasik disebut...", opts: ["Monofoni", "Polifoni", "Homofoni", "Atonal"], ans: 2 },
+      { q: "Komponis 'Moonlight Sonata' dan 'Symphony No. 9' adalah...", opts: ["Palestrina", "Beethoven", "Handel", "Purcell"], ans: 1 },
+      { q: "Ukuran orkestra membesar menjadi raksasa & memakai nada kromatik pada era...", opts: ["Kuno", "Pertengahan", "Romantik", "Renaisans"], ans: 2 },
+      { q: "Tangga nada gerejawi Abad Pertengahan (Dorian, Phrygian, Lydian) disebut...", opts: ["Modus", "Kromatik", "Pentatonik", "Triad"], ans: 0 },
+      { q: "Lagu sekuler Abad Pertengahan yang berarti 'nyanyian pagi' adalah...", opts: ["Estampie", "Pastourelle", "Alba", "Lamentatio"], ans: 2 },
+      { q: "Gaya musik abad ke-20 yang membebaskan diri dari aturan tonal disebut...", opts: ["Plainchant", "Kontemporer", "Rokoko", "Minisinger"], ans: 1 }
+    ];
+
+    /* DATA GAME 2: TEBAK KATA (MINIMAL 10 ISTILAH MATERI) */
+    const WORD_PUZZLES = [
+      { word: "GREGORIAN", clue: "Musik sakral vokal monofoni berbahasa Latin pada era Abad Pertengahan." },
+      { word: "RENAISANS", clue: "Era 'kelahiran kembali' (1400–1600 M) yang menjunjung tinggi humanisme." },
+      { word: "HARPSICHORD", clue: "Alat musik tuts cikal bakal piano yang populer pada Era Barok." },
+      { word: "TROUBADOURS", clue: "Kelompok musisi sekuler keliling dari Prancis Selatan pada Abad Pertengahan." },
+      { word: "HOMOFONI", clue: "Karakter tekstur musik Era Klasik berupa melodi utama di atas iringan akord." },
+      { word: "KROMATIK", clue: "Pengembangan nada pada Era Romantik untuk memperkaya ekspresi emosi." },
+      { word: "PLAINCHANT", clue: "Sebutan lain musik polos tanpa iringan instrumen dalam ibadat gereja." },
+      { word: "BEETHOVEN", clue: "Komponis besar jembatan Era Klasik dan Romantik pencipta Moonlight Sonata." },
+      { word: "PALESTRINA", clue: "Salah satu dari lima komponis vokal polifonik paling terkenal di Era Renaisans." },
+      { word: "PENTATONIK", clue: "Tangga nada yang mulai dipakai di Era Modern sehingga orkestra kembali mengecil." },
+      { word: "ESTAMPIE", clue: "Jenis lagu sekuler terkenal pada Abad Pertengahan yang berfungsi sebagai musik dansa." },
+      { word: "VIRTUOSO", clue: "Sebutan bagi pemain piano atau biola berteknik sangat tinggi pada Era Romantik." }
+    ];
+
+    /* 10 SOAL ASESMEN SUMATIF (30% C1-C2, 40% C3, 30% C4-C6 HOTS BERBASIS STIMULUS) — SEMUA BERTAG TP1 */
+    const ASESMEN_QUESTIONS = [
+      {
+        id: "A1",
+        tp: "TP1",
+        level: "C1 (Mengingat)",
+        type: "pg",
+        stimulus: "Perjalanan musik Barat dimulai sejak sebelum runtuhnya Kekaisaran Romawi Barat pada tahun 476 M dan terus bertransformasi melintasi berbagai zaman.",
+        question: "Urutan kronologis yang benar bagi perkembangan zaman dalam periode Musik Klasik Barat adalah...",
+        options: [
+          "Abad Pertengahan → Renaisans → Barok & Rokoko → Klasik → Romantik",
+          "Renaisans → Abad Pertengahan → Klasik → Barok & Rokoko → Romantik",
+          "Abad Pertengahan → Barok & Rokoko → Renaisans → Romantik → Klasik",
+          "Klasik → Abad Pertengahan → Renaisans → Barok & Rokoko → Romantik"
+        ],
+        answer: 0,
+        explanation: "Urutan historis Musik Klasik Barat yang tepat adalah: Abad Pertengahan (476–1572) → Renaisans (1400–1600) → Barok & Rokoko (1600–1750) → Klasik (1750–1820) → Romantik (1815–1910)."
+      },
+      {
+        id: "A2",
+        tp: "TP1",
+        level: "C2 (Memahami)",
+        type: "pg",
+        stimulus: "Pada Abad Pertengahan, musik gereja menggunakan tangga nada gerejawi (modus) seperti Dorian, Phrygian, Lydian, dan Mixolydian dengan dua sifat pembawaan melodi.",
+        question: "Perbedaan antara sifat melodi Recitative dan Melismatis dalam musik Abad Pertengahan adalah...",
+        options: [
+          "Recitative dinyanyikan sederhana (satu nada per suku kata), sedangkan Melismatis rumit (banyak nada dalam satu suku kata)",
+          "Recitative memakai orkestra penuh, sedangkan Melismatis memakai gitar elektrik",
+          "Recitative hanya untuk musik dansa Estampie, sedangkan Melismatis untuk lagu gembala",
+          "Recitative menggunakan tangga nada pentatonik, sedangkan Melismatis menggunakan akord triad"
+        ],
+        answer: 0,
+        explanation: "Dalam tradisi Gregorian, gaya Recitative bersifat sederhana dan deklaratif mengikuti ucapan teks, sedangkan Melismatis menghiasi satu suku kata dengan rangkaian nada yang rumit."
+      },
+      {
+        id: "A3",
+        tp: "TP1",
+        level: "C2 (Memahami)",
+        type: "bs",
+        stimulus: "Pada periode akhir Zaman Barok muncul gaya Rokoko yang banyak berkembang di lingkungan istana bangsawan Eropa.",
+        question: "Benar atau Salah: Pada periode Rokoko, musik dijadikan komoditas untuk menaikkan gengsi para bangsawan dan hiasan ornamennya sudah dituliskan di dalam partitur musik.",
+        options: ["Benar", "Salah"],
+        answer: 0,
+        explanation: "Benar. Periode Rokoko menandai akhir era Barok di mana musik menjadi simbol prestise/gengsi bangsawan dan ornamen ditulis rapi dalam partitur."
+      },
+      {
+        id: "A4",
+        tp: "TP1",
+        level: "C3 (Menerapkan)",
+        type: "pg",
+        stimulus: "Seorang siswa mendengarkan sebuah rekaman musik instrumental. Ia mencatat ciri berikut: (1) terdengar suara petikan senar tuts yang tajam tanpa gradasi crescendo panjang, (2) terdapat kontras keras-lembut tiba-tiba antara pemain solo dan kelompok pengiring, (3) alur melodi berulang dengan ornamen rapat.",
+        question: "Berdasarkan ciri auditif tersebut, karya yang sedang didengarkan siswa berasal dari era...",
+        options: [
+          "Era Barok (1600–1750 M)",
+          "Era Abad Pertengahan (476–1572 M)",
+          "Era Romantik (1815–1910 M)",
+          "Era Modern/Kontemporer (1900–sekarang)"
+        ],
+        answer: 0,
+        explanation: "Suara tuts petik (Harpsichord), kontras solo vs iringan (teknik concerto), dan alur berpola dengan ornamen rapat merupakan identitas khas Era Barok."
+      },
+      {
+        id: "A5",
+        tp: "TP1",
+        level: "C3 (Menerapkan)",
+        type: "pg",
+        stimulus: "Dalam konser sekolah, kelompok ansambel SMA Swasta Santa Maria Kabanjahe membawakan karya dengan melodi utama yang jernih pada piano, diiringi akord 3 nada yang teratur, disertai perubahan dinamika crescendo dan decrescendo yang halus.",
+        question: "Penerapan teknik permainan ansambel tersebut mencerminkan prinsip estetika musik...",
+        options: [
+          "Era Klasik yang mengutamakan keseimbangan, kejernihan homofoni, dan kontrol ekspresi",
+          "Era Kuno yang berfokus pada ritme ritual mitologi Yunani",
+          "Abad Pertengahan yang menolak pemakaian instrumen bernada",
+          "Era Kontemporer yang menolak seluruh aturan birama dan tonalitas"
+        ],
+        answer: 0,
+        explanation: "Penggunaan piano, akord 3 nada (triad), tekstur homofonik, dan gradasi crescendo-decrescendo yang terkontrol adalah ciri utama Era Klasik (1750–1820 M)."
+      },
+      {
+        id: "A6",
+        tp: "TP1",
+        level: "C3 (Menerapkan)",
+        type: "pgk",
+        stimulus: "Perhatikan daftar instrumen musik berikut ini:\n1. Gamelan dan Angklung\n2. Harpsichord dan Orgel Pipa\n3. Sasando dan Talempong\n4. Lira dan Aulos",
+        question: "Pilihan Ganda Kompleks: Manakah pasangan nomor instrumen yang mulai berinteraksi dan digunakan dalam komposisi Musik Modern/Kontemporer akibat kemajuan teknologi dan keterbukaan lintas budaya?",
+        options: [
+          "1 dan 3 (Gamelan, Angklung, Sasando, dan Talempong)",
+          "2 dan 4 (Harpsichord, Orgel Pipa, Lira, dan Aulos)",
+          "1 dan 4 (Gamelan, Angklung, Lira, dan Aulos)",
+          "2 dan 3 (Harpsichord, Orgel Pipa, Sasando, dan Talempong)"
+        ],
+        answer: 0,
+        explanation: "Pada Era Modern/Kontemporer, kemajuan teknologi audiovisual mempertemukan musik antarnegara sehingga instrumen Nusantara seperti gamelan, angklung, kolintang, sasando, dan talempong berpadu dengan instrumen Barat."
+      },
+      {
+        id: "A7",
+        tp: "TP1",
+        level: "C3 (Menerapkan)",
+        type: "pg",
+        stimulus: "Seorang komposer abad ke-19 menulis simfoni untuk 100 pemusik orkestra dengan bagian solo biola yang menuntut kecepatan jari luar biasa (virtuoso), menggunakan banyak nada kromatik, dan ditutup dengan klimaks fortissimo yang sangat dramatis.",
+        question: "Tujuan artistik utama komposer berdasarkan karakteristik era tersebut adalah...",
+        options: [
+          "Mengekspresikan gejolak emosi dan imajinasi pribadi secara maksimal",
+          "Menyederhanakan lagu agar mudah dihafal oleh biarawan saat misa",
+          "Menghidupkan kembali tata aturan arsitektur Yunani Kuno",
+          "Menghilangkan seluruh perbedaan tinggi-rendah nada dalam musik"
+        ],
+        answer: 0,
+        explanation: "Pada Era Romantik (1815–1910 M), orkestra raksasa, virtuoso, nada kromatik, dan ending spektakuler digunakan untuk kebebasan ekspresi emosi serta imajinasi komponis."
+      },
+      {
+        id: "A8",
+        tp: "TP1",
+        level: "C4 (Menganalisis — HOTS)",
+        type: "pg",
+        stimulus: "Pada Abad Pertengahan dan Barok, komposisi musik banyak diciptakan untuk kepentingan gereja atau bangsawan (sistem patronase). Memasuki Era Klasik (Masa Pencerahan), pertunjukan konser mulai dibuka untuk kaum pedagang dan masyarakat luas.",
+        question: "Analisislah dampak langsung perubahan kondisi sosial tersebut terhadap struktur komposisi musik Era Klasik!",
+        options: [
+          "Komposisi menjadi lebih jernih, terstruktur, dan mudah dipahami pendengar umum dibanding kerumitan polifoni Barok",
+          "Musik kembali menjadi nyanyian monofoni tanpa iringan karena rakyat tidak menyukai alat musik",
+          "Ukuran orkestra menyusut menjadi satu pemain saja karena biaya tiket konser terlalu mahal",
+          "Komponis berhenti menulis partitur dan hanya mengandalkan teriakan penonton"
+        ],
+        answer: 0,
+        explanation: "Ketika audiens meluas ke kaum pedagang dan rakyat pada Masa Pencerahan, komponis Klasik menyederhanakan kerumitan kontrapung Barok menjadi struktur homofonik yang elegan dan komunikatif."
+      },
+      {
+        id: "A9",
+        tp: "TP1",
+        level: "C5 (Mengevaluasi — HOTS)",
+        type: "pg",
+        stimulus: "Perhatikan pernyataan berikut: 'Pada Era Modern/Kontemporer (1900–sekarang), penggunaan tangga nada pentatonik dan gaya eksperimental membuat ukuran orkestra cenderung mengecil dibandingkan orkestra raksasa Era Romantik.'",
+        question: "Evaluasilah alasan musikal yang paling logis di balik fenomena mengecilnya formasi ansambel pada Era Modern tersebut!",
+        options: [
+          "Komponis modern lebih mengeksplorasi warna bunyi unik, keheningan, dan karakter spesifik tiap instrumen daripada sekadar volume masif",
+          "Pada abad ke-20 jumlah pemusik profesional berkurang drastis sehingga tidak ada yang bisa bermain orkestra",
+          "Alat musik tiup logam dan perkusi dilarang dimainkan setelah tahun 1900",
+          "Tangga nada pentatonik hanya dapat dimainkan oleh maksimal dua orang pemusik"
+        ],
+        answer: 0,
+        explanation: "Musik Modern menekankan eksplorasi warna bunyi (timbre), sistem pentatonik/atonal, dan karakter individual tiap instrumen/etnis, sehingga tidak lagi membutuhkan penggandaan instrumen masif ala Romantik."
+      },
+      {
+        id: "A10",
+        tp: "TP1",
+        level: "C6 (Mencipta/Merancang — HOTS)",
+        type: "pg",
+        stimulus: "Kamu ditugaskan merancang sebuah proyek musik kolaborasi lintas zaman untuk pentas seni SMA Swasta Santa Maria Kabanjahe dengan tema 'Jejak Musik Barat dalam Identitas Nusantara'.",
+        question: "Rancangan karya manakah yang paling tepat memadukan prinsip Era Barok/Klasik dengan spirit Era Kontemporer secara autentik?",
+        options: [
+          "Mengolah tema melodi 'The Four Seasons' Vivaldi dengan struktur akord jernih, lalu memadukannya dengan ritme talempong, gondang/gamelan, dan efek audio digital",
+          "Menyanyikan lagu pop masa kini secara unisono tanpa iringan sambil membaca biografi Martin Luther",
+          "Memutar rekaman musik Gregorian asli tanpa perubahan apa pun di tengah lapangan sekolah",
+          "Memainkan tangga nada mayor saja menggunakan satu buah pianika tanpa variasi dinamika atau ritme"
+        ],
+        answer: 0,
+        explanation: "Mengambil motif historis Barok/Klasik lalu mengolahnya secara kreatif bersama instrumen tradisional Nusantara dan teknologi audiovisual mewujudkan sintesis sejarah musik Barat dan semangat emansipatif Kontemporer."
+      }
+    ];
+
+    /* ========================================================================
+       BAGIAN B: WEB AUDIO API ENGINE (EFEK SUARA & SINTESIS MUSIK ERA)
+       ======================================================================== */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+        this.volume = 0.6;
+        this.simTimer = null;
+        this.simStep = 0;
+      }
+
+      unlock() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) this.ctx = new AudioCtx();
+        }
+        if (this.ctx && this.ctx.state === "suspended") {
+          this.ctx.resume();
+        }
+      }
+
+      playTone(freq, duration = 0.14, type = "sine", delay = 0, gainScale = 0.3) {
+        if (!this.enabled || this.volume <= 0) return;
+        this.unlock();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime + delay;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now);
+
+        const peak = Math.max(0.001, this.volume * gainScale);
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(peak, now + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + duration + 0.02);
+      }
+
+      click() {
+        this.playTone(620, 0.07, "triangle", 0, 0.22);
+      }
+
+      correct() {
+        this.playTone(523.25, 0.12, "sine", 0, 0.3);
+        this.playTone(659.25, 0.18, "sine", 0.09, 0.32);
+      }
+
+      wrong() {
+        this.playTone(230, 0.16, "sawtooth", 0, 0.22);
+        this.playTone(185, 0.22, "sawtooth", 0.11, 0.22);
+      }
+
+      win() {
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        notes.forEach((n, i) => this.playTone(n, 0.22, "triangle", i * 0.1, 0.32));
+      }
+
+      startEraLoop(getParamsFn) {
+        this.stopEraLoop();
+        this.unlock();
+        this.simStep = 0;
+
+        const tick = () => {
+          const params = getParamsFn();
+          if (!params || !params.playing) return;
+
+          const { era, tempo, complexity } = params;
+          const beatSec = 60 / tempo;
+
+          if (this.enabled && this.volume > 0 && this.ctx) {
+            const scaleRatios = era.harmonics;
+            const noteIdx = this.simStep % scaleRatios.length;
+            const freq = era.baseFreq * scaleRatios[noteIdx];
+            const waveType =
+              era.id === "kuno" || era.id === "pertengahan" ? "sine" :
+              era.id === "barok" ? "sawtooth" :
+              era.id === "modern" ? "square" : "triangle";
+
+            this.playTone(freq, beatSec * 0.75, waveType, 0, 0.24);
+
+            // Tambah lapisan harmoni sesuai kompleksitas tekstur
+            if (complexity >= 40 && scaleRatios.length > 1) {
+              const harmFreq = era.baseFreq * scaleRatios[(noteIdx + 1) % scaleRatios.length];
+              this.playTone(harmFreq, beatSec * 0.65, "sine", 0.04, 0.14);
+            }
+            if (complexity >= 75) {
+              this.playTone(era.baseFreq * 2, beatSec * 0.4, "triangle", beatSec * 0.35, 0.12);
+            }
+          }
+
+          this.simStep++;
+          this.simTimer = setTimeout(tick, beatSec * 1000);
+        };
+
+        tick();
+      }
+
+      stopEraLoop() {
+        if (this.simTimer) {
+          clearTimeout(this.simTimer);
+          this.simTimer = null;
+        }
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    /* ========================================================================
+       BAGIAN C: STATE MANAGEMENT & LOCALSTORAGE
+       ======================================================================== */
+    const STORAGE_KEY = "mpi_sejarah_musik_barat_v1";
+
+    const defaultState = {
+      studentName: "",
+      theme: "dark",
+      soundEnabled: true,
+      volume: 0.6,
+      onboardingDone: false,
+      activeRoute: "beranda",
+      visitedMenus: [],
+      slideIndex: 0,
+      revealedPoints: {},
+      quizBestScore: null,
+      asesmenResult: null,
+      gameStats: {
+        duelWinsP1: 0,
+        duelWinsP2: 0,
+        tebakKataBest: 0
+      }
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...defaultState };
+        return { ...defaultState, ...JSON.parse(raw) };
+      } catch (e) {
+        return { ...defaultState };
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        // Abaikan jika storage penuh/diblokir
+      }
+      updateGlobalProgressUI();
+    }
+
+    function markMenuVisited(menuId) {
+      if (!state.visitedMenus.includes(menuId)) {
+        state.visitedMenus.push(menuId);
+        saveState();
+      }
+    }
+
+    function calculateOverallProgress() {
+      // Bobot: Kunjungan 11 menu (55%), Kuis selesai (20%), Asesmen selesai (25%)
+      const menuScore = Math.min(55, Math.round((state.visitedMenus.length / MENU_ITEMS.length) * 55));
+      const quizScore = state.quizBestScore !== null ? 20 : 0;
+      const asesmenScore = state.asesmenResult !== null ? 25 : 0;
+      return Math.min(100, menuScore + quizScore + asesmenScore);
+    }
+
+    function updateGlobalProgressUI() {
+      const pct = calculateOverallProgress();
+      const bar = document.getElementById("global-progress-bar");
+      const txt = document.getElementById("global-progress-text");
+      if (bar) bar.style.width = `${pct}%`;
+      if (txt) txt.textContent = `${pct}%`;
+    }
+
+    /* ========================================================================
+       BAGIAN D: TEMA & KONTROL AUDIO UI
+       ======================================================================== */
+    function applyTheme(theme) {
+      state.theme = theme;
+      document.documentElement.setAttribute("data-theme", theme);
+      const iconName = theme === "dark" ? "sun" : "moon";
+      ["cover-theme-toggle", "app-theme-toggle"].forEach((id) => {
+        const btn = document.getElementById(id);
+        if (btn) btn.innerHTML = `<i data-lucide="${iconName}"></i>`;
+      });
+      refreshIcons();
+      saveState();
+    }
+
+    function applySoundUI() {
+      sound.enabled = state.soundEnabled;
+      sound.volume = state.volume;
+      const iconName = state.soundEnabled && state.volume > 0 ? "volume-2" : "volume-x";
+      ["cover-sound-toggle", "app-sound-toggle"].forEach((id) => {
+        const btn = document.getElementById(id);
+        if (btn) btn.innerHTML = `<i data-lucide="${iconName}" style="width:18px;height:18px;"></i>`;
+      });
+      const slider = document.getElementById("volume-slider");
+      if (slider) slider.value = state.volume;
+      refreshIcons();
+      saveState();
+    }
+
+    function refreshIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === "function") {
+        window.lucide.createIcons();
+      }
+    }
+
+    /* ========================================================================
+       BAGIAN E: NAVIGASI SINGLE PAGE APP & QUICK NAV
+       ======================================================================== */
+    function renderQuickNav() {
+      const nav = document.getElementById("quick-nav-bar");
+      if (!nav) return;
+      nav.innerHTML = MENU_ITEMS.map((m) => {
+        const isActive = state.activeRoute === m.id;
+        const isDone = state.visitedMenus.includes(m.id);
+        return `
+          <button type="button" class="nav-pill ${isActive ? "active" : ""}" data-route="${m.id}">
+            ${isDone ? '<span class="dot-done" aria-hidden="true"></span>' : ""}
+            <span>${m.label}</span>
+          </button>
+        `;
+      }).join("");
+
+      const bentoBtn = document.getElementById("btn-back-bento");
+      if (bentoBtn) {
+        bentoBtn.classList.toggle("active-menu", state.activeRoute === "beranda");
+      }
+    }
+
+    function navigateTo(routeId, playSound = true) {
+      if (playSound) sound.click();
+      sound.stopEraLoop();
+      if (asesmenTimerInterval && routeId !== "asesmen") {
+        // Timer tetap berjalan di latar jika sedang mengerjakan asesmen
+      }
+
+      state.activeRoute = routeId;
+      markMenuVisited(routeId);
+      renderQuickNav();
+
+      const main = document.getElementById("main-content");
+      main.innerHTML = "";
+
+      const routes = {
+        beranda: renderBeranda,
+        petunjuk: renderPetunjuk,
+        tujuan: renderTujuan,
+        materi: renderMateri,
+        video: renderVideo,
+        simulasi: renderSimulasi,
+        kuis: renderKuis,
+        game: renderGame,
+        asesmen: renderAsesmen,
+        rangkuman: renderRangkuman,
+        profil: renderProfil
+      };
+
+      const renderFn = routes[routeId] || renderBeranda;
+      renderFn(main);
+      refreshIcons();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* ========================================================================
+       BAGIAN F: RENDER SETIAP HALAMAN (11 MENU LENGKAP)
+       ======================================================================== */
+
+    /* 1. BERANDA (MODE BENTO GRID) */
+    function renderBeranda(container) {
+      const nama = state.studentName || "Sahabat Musik";
+      const pct = calculateOverallProgress();
+      const kuisInfo = state.quizBestScore !== null ? `Skor Terbaik: ${state.quizBestScore}` : "10 Soal Latihan";
+      const asesmenInfo = state.asesmenResult !== null
+        ? `Nilai: ${state.asesmenResult.score} (${state.asesmenResult.score >= MEDIA_IDENTITY.kktp ? "Tuntas" : "Belum Tuntas"})`
+        : "10 Soal · 20 Menit";
+
+      const badgeMap = {
+        beranda: `${pct}% Selesai`,
+        petunjuk: "Panduan",
+        tujuan: "1 TP Utama",
+        materi: `${state.slideIndex + 1} / ${MATERI_SLIDES.length} Slide`,
+        video: "2 Tayangan",
+        simulasi: "Interaktif Audio",
+        kuis: kuisInfo,
+        game: "2 Mode Seru",
+        asesmen: asesmenInfo,
+        rangkuman: "7 Era Kunci",
+        profil: "Pengembang"
+      };
+
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="bento-grid">
+            ${MENU_ITEMS.map((item) => {
+              if (item.id === "beranda") {
+                return `
+                  <div class="bento-card bento-beranda" style="cursor:default;">
+                    <div class="bento-top">
+                      <span class="badge"><i data-lucide="sparkles" style="width:14px;height:14px;"></i> Selamat Datang</span>
+                      <span class="bento-tag">${pct}% Progres</span>
+                    </div>
+                    <div>
+                      <h1 class="bento-title" style="font-size:1.45rem;">Halo, ${escapeHTML(nama)}! 👋</h1>
+                      <p class="bento-desc" style="color:var(--text);opacity:0.88;margin-top:0.35rem;">
+                        Mari telusuri <strong>Perkembangan Musik Barat dari Zaman Kuno Sampai Modern</strong> secara runtut, interaktif, dan penuh bunyi!
+                      </p>
+                    </div>
+                  </div>
+                `;
+              }
+              return `
+                <button type="button" class="bento-card bento-${item.id}" data-route="${item.id}">
+                  <div class="bento-top">
+                    <div class="bento-icon"><i data-lucide="${item.icon}"></i></div>
+                    <span class="bento-tag">${badgeMap[item.id]}</span>
+                  </div>
+                  <div>
+                    <div class="bento-title">${item.label}</div>
+                    <div class="bento-desc">${item.desc}</div>
+                  </div>
+                </button>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    /* 2. PETUNJUK PENGGUNAAN */
+    function renderPetunjuk(container) {
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">Panduan Belajar</span>
+              <h1>Petunjuk Penggunaan Media</h1>
+              <p>Pahami fungsi setiap menu dan ikon agar eksplorasi belajarmu maksimal.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" id="btn-replay-onboard">
+              <i data-lucide="compass" style="width:18px;height:18px;"></i>
+              <span>Buka Tur Singkat</span>
+            </button>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;">
+            <div class="card">
+              <div class="bento-icon" style="margin-bottom:0.75rem;"><i data-lucide="layout-grid"></i></div>
+              <h2 style="font-size:1.15rem;font-weight:800;margin-bottom:0.5rem;">1. Navigasi Menu Bento Grid</h2>
+              <p style="color:var(--muted);font-size:0.93rem;">
+                Klik tombol <strong>Menu Bento</strong> di pojok kiri atas kapan saja untuk kembali ke layar utama. Kamu juga dapat berpindah cepat antarhalaman lewat bilah navigasi horizontal di bagian atas.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="bento-icon" style="margin-bottom:0.75rem;"><i data-lucide="volume-2"></i></div>
+              <h2 style="font-size:1.15rem;font-weight:800;margin-bottom:0.5rem;">2. Kontrol Suara & Tema Aurora</h2>
+              <p style="color:var(--muted);font-size:0.93rem;">
+                Gunakan ikon <strong>Speaker</strong> dan penggeser volume untuk mengatur efek suara dan sintesis nada di Simulasi. Gunakan ikon <strong>Matahari/Bulan</strong> untuk beralih antara Mode Gelap dan Mode Terang.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="bento-icon" style="margin-bottom:0.75rem;"><i data-lucide="route"></i></div>
+              <h2 style="font-size:1.15rem;font-weight:800;margin-bottom:0.5rem;">3. Alur Belajar Deep Learning</h2>
+              <p style="color:var(--muted);font-size:0.93rem;">
+                Ikuti tahapan: <strong>Tujuan → Materi (8 Slide) → Video → Simulasi → Kuis → Game → Asesmen → Rangkuman</strong>. Seluruh progres dan skormu tersimpan otomatis di peramban.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1.25rem;">
+            <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:0.85rem;">Arti Ikon & Tombol Utama</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;font-size:0.9rem;">
+              <div style="display:flex;align-items:center;gap:0.65rem;"><span class="badge"><i data-lucide="book-open" style="width:14px;height:14px;"></i></span> <span><strong>Materi:</strong> Slide bertahap + tombol panah keyboard (← / →).</span></div>
+              <div style="display:flex;align-items:center;gap:0.65rem;"><span class="badge"><i data-lucide="sliders" style="width:14px;height:14px;"></i></span> <span><strong>Simulasi:</strong> Eksplorasi karakter bunyi & tempo tiap era.</span></div>
+              <div style="display:flex;align-items:center;gap:0.65rem;"><span class="badge"><i data-lucide="gamepad-2" style="width:14px;height:14px;"></i></span> <span><strong>Game:</strong> Duel 2 Pemain & Tebak Kata istilah musik.</span></div>
+              <div style="display:flex;align-items:center;gap:0.65rem;"><span class="badge"><i data-lucide="award" style="width:14px;height:14px;"></i></span> <span><strong>Asesmen:</strong> Evaluasi akhir berwaktu 20 menit (KKTP 75).</span></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("btn-replay-onboard").addEventListener("click", () => {
+        sound.click();
+        startOnboardingTour();
+      });
+    }
+
+    /* 3. TUJUAN PEMBELAJARAN */
+    function renderTujuan(container) {
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">${MEDIA_IDENTITY.kurikulum}</span>
+              <h1>Tujuan Pembelajaran</h1>
+              <p>${MEDIA_IDENTITY.mataPelajaran || MEDIA_IDENTITY.mapel} · ${MEDIA_IDENTITY.fase} · Alokasi ${MEDIA_IDENTITY.alokasiWaktu}</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-route="materi">
+              <span>Lanjut ke Materi</span>
+              <i data-lucide="arrow-right" style="width:18px;height:18px;"></i>
+            </button>
+          </div>
+
+          ${TUJUAN_PEMBELAJARAN.map((tp) => `
+            <div class="card" style="margin-bottom:1.25rem;border-left:5px solid var(--primary);">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                <span class="badge" style="font-size:0.85rem;">${tp.kode} — Capaian Utama</span>
+                <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+                  ${tp.dimensiProfil.map((d) => `<span class="badge badge-secondary">${d}</span>`).join("")}
+                </div>
+              </div>
+              <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">${tp.judul}</h2>
+              <p style="font-size:1rem;color:var(--text);margin-bottom:1rem;">${tp.deskripsi}</p>
+              <div class="context-box">
+                <strong>Alur Pembelajaran Mendalam (Mindful, Meaningful, Joyful):</strong><br/>
+                ${tp.pengalamanBelajar}
+              </div>
+            </div>
+          `).join("")}
+
+          <div class="card">
+            <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:1rem;">Peta Perjalanan Belajar (3 Tahap)</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+              <div style="padding:1rem;border-radius:14px;background:var(--surface-2);">
+                <div class="badge" style="margin-bottom:0.4rem;">Tahap 1 · Memahami</div>
+                <p style="font-size:0.9rem;color:var(--muted);">Pelajari 8 slide kronologi sejarah musik Barat dan simak tayangan video referensi.</p>
+              </div>
+              <div style="padding:1rem;border-radius:14px;background:var(--surface-2);">
+                <div class="badge" style="margin-bottom:0.4rem;">Tahap 2 · Mengaplikasi</div>
+                <p style="font-size:0.9rem;color:var(--muted);">Uji parameter tempo dan kompleksitas tekstur bunyi pada Simulasi Era Musik, lalu berlatih di Kuis & Game.</p>
+              </div>
+              <div style="padding:1rem;border-radius:14px;background:var(--surface-2);">
+                <div class="badge" style="margin-bottom:0.4rem;">Tahap 3 · Merefleksi</div>
+                <p style="font-size:0.9rem;color:var(--muted);">Selesaikan Asesmen Sumatif (KKTP 75) dan telaah Rangkuman untuk mengaitkan sejarah musik Barat dengan karya masa kini.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* 4. PRESENTASI MATERI (8 SLIDE INTERAKTIF + REVEAL POIN + KEYBOARD ARROW) */
+    function getSlideIllustrationSVG(type) {
+      const svgs = {
+        kuno: `<svg viewBox="0 0 260 200" width="240" height="185" fill="none"><rect width="260" height="200" rx="16" fill="#0c1e29"/><path d="M55 165 H205 M70 165 V65 M105 165 V65 M155 165 V65 M190 165 V65 M50 65 L130 28 L210 65 Z" stroke="#2dd4bf" stroke-width="2.5"/><path d="M115 142 C102 120 105 95 120 86 M145 142 C158 120 155 95 140 86" stroke="#f9a8d4" stroke-width="3" stroke-linecap="round"/><line x1="125" y1="90" x2="125" y2="140" stroke="#818cf8" stroke-width="2"/><line x1="130" y1="90" x2="130" y2="140" stroke="#818cf8" stroke-width="2"/><line x1="135" y1="90" x2="135" y2="140" stroke="#818cf8" stroke-width="2"/><text x="130" y="186" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="700">Lira & Kuil Yunani-Romawi (< 476 M)</text></svg>`,
+        pertengahan: `<svg viewBox="0 0 260 200" width="240" height="185" fill="none"><rect width="260" height="200" rx="16" fill="#0c1e29"/><line x1="30" y1="65" x2="230" y2="65" stroke="#38bdf8" stroke-opacity="0.5"/><line x1="30" y1="85" x2="230" y2="85" stroke="#38bdf8" stroke-opacity="0.5"/><line x1="30" y1="105" x2="230" y2="105" stroke="#38bdf8" stroke-opacity="0.5"/><line x1="30" y1="125" x2="230" y2="125" stroke="#38bdf8" stroke-opacity="0.5"/><rect x="52" y="79" width="12" height="12" fill="#2dd4bf"/><rect x="88" y="99" width="12" height="12" fill="#2dd4bf"/><rect x="124" y="59" width="12" height="12" fill="#f9a8d4"/><rect x="160" y="79" width="12" height="12" fill="#2dd4bf"/><rect x="196" y="99" width="12" height="12" fill="#818cf8"/><text x="130" y="165" fill="#e8edf7" font-size="12" text-anchor="middle" font-weight="700">Notasi Neuma · Monofoni Gregorian</text><text x="130" y="184" fill="#94a3b8" font-size="10" text-anchor="middle">476 – 1572 M (Sakral & Troubadours)</text></svg>`,
+        renaisans: `<svg viewBox="0 0 260 200" width="240" height="185" fill="none"><rect width="260" height="200" rx="16" fill="#0c1e29"/><path d="M25 60 Q90 35 155 60 T235 60" stroke="#2dd4bf" stroke-width="3"/><path d="M25 90 Q90 115 155 90 T235 90" stroke="#818cf8" stroke-width="3"/><path d="M25 120 Q90 95 155 120 T235 120" stroke="#f9a8d4" stroke-width="3"/><text x="130" y="162" fill="#e8edf7" font-size="12" text-anchor="middle" font-weight="700">Jalinan Suara Polifonik (Palestrina)</text><text x="130" y="182" fill="#94a3b8" font-size="10" text-anchor="middle">1400 – 1600 M · Era Humanisme</text></svg>`,
+        barok: `<svg viewBox="0 0 260 200" width="240" height="185" fill="none"><rect width="260" height="200" rx="16" fill="#0c1e29"/><path d="M40 135 H220 V95 L165 65 H40 Z" fill="#193444" stroke="#a78bfa" stroke-width="2.5"/><rect x="46" y="118" width="168" height="12" fill="#e8edf7"/><path d="M55 45 C75 25, 95 65, 115 45 C135 25, 155 65, 175 45" stroke="#2dd4bf" stroke-width="2.5"/><text x="130" y="165" fill="#e8edf7" font-size="12" text-anchor="middle" font-weight="700">Harpsichord & Ornamen Barok</text><text x="130" y="184" fill="#94a3b8" font-size="10" text-anchor="middle">1600 – 1750 M · Vivaldi & Handel</text></svg>`,
+        klasik: `<svg viewBox="0 0 260 200" width="240" height="185" fill="none"><rect width="260" height="200" rx="16" fill="#0c1e29"/><circle cx="130" cy="82" r="42" stroke="#34d399" stroke-width="2.5"/><path d="M95 82 H165 M130 47 V117" stroke="#818cf8" stroke-width="2"/><polygon points="50,145 210,130 210,160" fill="#2dd4bf" fill-opacity="0.3" stroke="#2dd4bf"/><text x="130" y="184" fill="#e8edf7" font-size="11" text-anchor="middle" font-weight="700">Simetri Homofoni & Crescendo (1750–1820)</text></svg>`,
+        romantik: `<svg viewBox="0 0 260 200" width="240" height="185" fill="none"><rect width="260" height="200" rx="16" fill="#0c1e29"/><path d="M25 130 C60 130, 85 40, 130 40 C175 40, 195 145, 235 30" stroke="#f9a8d4" stroke-width="3.5" stroke-linecap="round"/><circle cx="235" cy="30" r="6" fill="#2dd4bf"/><text x="130" y="165" fill="#e8edf7" font-size="12" text-anchor="middle" font-weight="700">Ekspresi Kromatik & Orkestra Raksasa</text><text x="130" y="184" fill="#94a3b8" font-size="10" text-anchor="middle">1815 – 1910 M · Beethoven & Brahms</text></svg>`,
+        modern: `<svg viewBox="0 0 260 200" width="240" height="185" fill="none"><rect width="260" height="200" rx="16" fill="#0c1e29"/><rect x="45" y="75" width="12" height="55" rx="4" fill="#2dd4bf"/><rect x="70" y="45" width="12" height="85" rx="4" fill="#818cf8"/><rect x="95" y="90" width="12" height="40" rx="4" fill="#f9a8d4"/><rect x="120" y="35" width="12" height="95" rx="4" fill="#fbbf24"/><rect x="145" y="65" width="12" height="65" rx="4" fill="#2dd4bf"/><rect x="170" y="50" width="12" height="80" rx="4" fill="#818cf8"/><rect x="195" y="80" width="12" height="50" rx="4" fill="#f9a8d4"/><text x="130" y="162" fill="#e8edf7" font-size="12" text-anchor="middle" font-weight="700">Emansipasi Bunyi & Kolaborasi Etnis</text><text x="130" y="182" fill="#94a3b8" font-size="10" text-anchor="middle">1900 – Sekarang · Teknologi Audiovisual</text></svg>`,
+        sintesis: `<svg viewBox="0 0 260 200" width="240" height="185" fill="none"><rect width="260" height="200" rx="16" fill="#0c1e29"/><line x1="28" y1="100" x2="232" y2="100" stroke="#818cf8" stroke-width="3"/><circle cx="40" cy="100" r="8" fill="#2dd4bf"/><circle cx="76" cy="100" r="8" fill="#38bdf8"/><circle cx="112" cy="100" r="8" fill="#818cf8"/><circle cx="148" cy="100" r="8" fill="#a78bfa"/><circle cx="184" cy="100" r="8" fill="#34d399"/><circle cx="220" cy="100" r="10" fill="#f9a8d4"/><text x="130" y="145" fill="#e8edf7" font-size="12" text-anchor="middle" font-weight="700">Garis Waktu Evolusi Musik Barat</text><text x="130" y="166" fill="#94a3b8" font-size="10" text-anchor="middle">Kuno → Pertengahan → Renaisans → Barok → Klasik → Romantik → Modern</text></svg>`
+      };
+      return svgs[type] || svgs.sintesis;
+    }
+
+    function renderMateri(container) {
+      const idx = state.slideIndex;
+      const slide = MATERI_SLIDES[idx];
+      const revealedCount = state.revealedPoints[idx] || 1;
+
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">${slide.era}</span>
+              <h1>Slide ${slide.nomor} dari ${MATERI_SLIDES.length}: ${slide.judul}</h1>
+              <p>Gunakan tombol <strong>Munculkan Poin</strong> atau panah keyboard (← / →) untuk berpindah slide.</p>
+            </div>
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+              ${MATERI_SLIDES.map((s, i) => `
+                <button type="button" class="soal-num-btn ${i === idx ? "current" : i < idx ? "answered" : ""}" data-slide-jump="${i}" style="width:38px;height:38px;min-width:38px;min-height:38px;">
+                  ${s.nomor}
+                </button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="slide-stage">
+              <div>
+                <p style="font-size:1rem;line-height:1.7;margin-bottom:0.75rem;">${slide.ringkasan}</p>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0.75rem;">
+                  <strong style="font-size:0.9rem;color:var(--primary-text);">Poin Kunci (${Math.min(revealedCount, slide.poin.length)}/${slide.poin.length}):</strong>
+                  ${revealedCount < slide.poin.length ? `
+                    <button type="button" class="btn btn-secondary" id="btn-reveal-point" style="padding:0.4rem 0.85rem;min-height:36px;font-size:0.82rem;">
+                      <i data-lucide="plus-circle" style="width:15px;height:15px;"></i>
+                      <span>Munculkan Poin Berikutnya</span>
+                    </button>
+                  ` : `<span class="badge">Semua Poin Terbuka</span>`}
+                </div>
+
+                <ul class="point-list">
+                  ${slide.poin.map((p, pIdx) => `
+                    <li class="point-item ${pIdx < revealedCount ? "revealed" : ""}" style="${pIdx < revealedCount ? "" : "display:none;"}">
+                      ${p}
+                    </li>
+                  `).join("")}
+                </ul>
+
+                <div class="context-box">
+                  <strong><i data-lucide="lightbulb" style="width:15px;height:15px;vertical-align:middle;"></i> Konteks Kehidupan Sehari-hari:</strong>
+                  <p style="margin-top:0.25rem;">${slide.konteks}</p>
+                </div>
+              </div>
+
+              <div class="slide-visual-box">
+                ${getSlideIllustrationSVG(slide.svgType)}
+                <p style="margin-top:0.85rem;font-size:0.84rem;color:var(--muted);text-align:center;">
+                  Visualisasi Konsep · Slide ${slide.nomor}/${MATERI_SLIDES.length}
+                </p>
+              </div>
+            </div>
+
+            <div class="slide-controls">
+              <button type="button" class="btn btn-secondary" id="btn-prev-slide" ${idx === 0 ? "disabled style='opacity:0.45;cursor:not-allowed;'" : ""}>
+                <i data-lucide="chevron-left" style="width:18px;height:18px;"></i>
+                <span>Sebelumnya</span>
+              </button>
+
+              <span style="font-weight:700;font-size:0.9rem;color:var(--muted);">
+                Halaman ${slide.nomor} / ${MATERI_SLIDES.length}
+              </span>
+
+              ${idx < MATERI_SLIDES.length - 1 ? `
+                <button type="button" class="btn btn-primary" id="btn-next-slide">
+                  <span>Berikutnya</span>
+                  <i data-lucide="chevron-right" style="width:18px;height:18px;"></i>
+                </button>
+              ` : `
+                <button type="button" class="btn btn-primary" data-route="video">
+                  <span>Lanjut ke Video</span>
+                  <i data-lucide="play-circle" style="width:18px;height:18px;"></i>
+                </button>
+              `}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const revealBtn = document.getElementById("btn-reveal-point");
+      if (revealBtn) {
+        revealBtn.addEventListener("click", () => {
+          sound.click();
+          state.revealedPoints[idx] = Math.min(slide.poin.length, (state.revealedPoints[idx] || 1) + 1);
+          saveState();
+          renderMateri(container);
+          refreshIcons();
+        });
+      }
+
+      document.getElementById("btn-prev-slide").addEventListener("click", () => {
+        if (state.slideIndex > 0) {
+          sound.click();
+          state.slideIndex--;
+          saveState();
+          renderMateri(container);
+          refreshIcons();
+        }
+      });
+
+      const nextBtn = document.getElementById("btn-next-slide");
+      if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+          if (state.slideIndex < MATERI_SLIDES.length - 1) {
+            sound.click();
+            state.slideIndex++;
+            if (!state.revealedPoints[state.slideIndex]) state.revealedPoints[state.slideIndex] = 1;
+            saveState();
+            renderMateri(container);
+            refreshIcons();
+          }
+        });
+      }
+
+      container.querySelectorAll("[data-slide-jump]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          sound.click();
+          state.slideIndex = Number(btn.dataset.slideJump);
+          if (!state.revealedPoints[state.slideIndex]) state.revealedPoints[state.slideIndex] = 1;
+          saveState();
+          renderMateri(container);
+          refreshIcons();
+        });
+      });
+    }
+
+    /* 5. VIDEO PEMBELAJARAN (LAZY-LOAD + KOMENTAR GANTI ID VIDEO) */
+    function renderVideo(container) {
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">Tayangan Referensi Audio-Visual</span>
+              <h1>Video Pembelajaran Sejarah Musik Barat</h1>
+              <p>Simak ilustrasi evolusi bunyi dari zaman ke zaman, lalu jawab pertanyaan refleksi di bawahnya.</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-route="simulasi">
+              <span>Coba Simulasi Era</span>
+              <i data-lucide="sliders" style="width:18px;height:18px;"></i>
+            </button>
+          </div>
+
+          <div class="video-grid">
+            <div class="card">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+                <span class="badge">Video 1 · Kronologi Era</span>
+                <span style="font-size:0.8rem;color:var(--muted);">16:9 HD</span>
+              </div>
+              <div class="video-wrapper">
+                <!-- GANTI ID VIDEO DI SINI (contoh saat ini memakai ID placeholder edukasi) -->
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/9E6b3swbnWg"
+                  title="Referensi Sejarah Musik Barat dari Kuno hingga Modern"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <h2 style="font-size:1.1rem;font-weight:800;margin-top:1rem;">Evolusi Karakter Bunyi Musik Barat</h2>
+              <p style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem;">
+                Kata kunci pencarian YouTube yang disarankan: <em>"Sejarah Musik Barat SMA Seni Budaya"</em> atau <em>"Evolution of Western Classical Music Timeline"</em>.
+              </p>
+            </div>
+
+            <div class="card">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+                <span class="badge badge-secondary">Video 2 · Perbandingan Instrumen</span>
+                <span style="font-size:0.8rem;color:var(--muted);">16:9 HD</span>
+              </div>
+              <div class="video-wrapper">
+                <!-- GANTI ID VIDEO DI SINI -->
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/4Tr0otuiQuU"
+                  title="Contoh Karya Klasik & Romantik — Beethoven Moonlight Sonata"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <h2 style="font-size:1.1rem;font-weight:800;margin-top:1rem;">Ekspresi Piano Klasik Menuju Romantik</h2>
+              <p style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem;">
+                Kata kunci pencarian YouTube yang disarankan: <em>"Perbedaan Musik Barok Klasik dan Romantik"</em> atau <em>"Harpsichord vs Piano Comparison"</em>.
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1.5rem;">
+            <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:0.75rem;">Ringkasan Poin Penting & Pertanyaan Pemantik Refleksi</h3>
+            <ul class="point-list" style="margin-bottom:1.25rem;">
+              <li class="point-item revealed">Perubahan teknologi instrumen (dari Vokal & Orgel Pipa → Harpsichord → Piano → Instrumen Elektronik & Etnis) secara langsung mengubah ekspresi komposisi musik.</li>
+              <li class="point-item revealed">Setiap era lahir sebagai respons atas zaman sebelumnya: Renaisans merespons dominasi gereja, Klasik menyederhanakan kerumitan Barok, dan Modern membebaskan aturan tonal.</li>
+            </ul>
+            <div class="context-box">
+              <strong>Pertanyaan Refleksi (Diskusikan di Kelas):</strong>
+              <ol style="margin-left:1.25rem;margin-top:0.4rem;display:flex;flex-direction:column;gap:0.4rem;">
+                <li>Menurut pengamatan pendengaranmu, perubahan apa yang paling mencolok saat musik berpindah dari <strong>Era Barok (Harpsichord)</strong> ke <strong>Era Romantik (Orkestra Raksasa)</strong>?</li>
+                <li>Mengapa sikap emansipatif di <strong>Era Modern/Kontemporer</strong> membuka peluang besar bagi musisi Indonesia untuk memadukan gamelan, sasando, atau talempong dengan musik Barat?</li>
+                <li>Lagu populer favoritmu saat ini paling banyak mewarisi ciri dari era musik Barat yang mana (tekstur homofoni Klasik, emosi Romantik, atau eksperimen Modern)? Jelaskan!</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* 6. SIMULASI INTERAKTIF (CANVAS GELOMBANG BUNYI + WEB AUDIO SYNTHESIZER) */
+    function renderSimulasi(container) {
+      let selectedEraIdx = 0;
+      let isPlaying = false;
+      let tempo = SIMULATION_ERAS[0].tempoDefault;
+      let complexity = SIMULATION_ERAS[0].kompleksitasDefault;
+      let animFrameId = null;
+      let phase = 0;
+
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">Laboratorium Bunyi Interaktif</span>
+              <h1>Simulasi Mesin Waktu & Sintesis Era Musik Barat</h1>
+              <p>Pilih era musik, ubah parameter Tempo (BPM) dan Kompleksitas Tekstur, lalu amati gelombang bunyi dan dengarkan karakteristiknya.</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-route="kuis">
+              <span>Uji Pemahaman di Kuis</span>
+              <i data-lucide="check-square" style="width:18px;height:18px;"></i>
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="era-selector-grid" id="sim-era-buttons">
+              ${SIMULATION_ERAS.map((e, i) => `
+                <button type="button" class="era-chip ${i === 0 ? "active" : ""}" data-era-idx="${i}">
+                  ${e.nama}<br/><span style="font-size:0.7rem;font-weight:500;opacity:0.85;">${e.tahun}</span>
+                </button>
+              `).join("")}
+            </div>
+
+            <div class="sim-layout">
+              <div>
+                <canvas id="sim-canvas" width="600" height="250" aria-label="Visualisasi Gelombang Bunyi Era Musik"></canvas>
+
+                <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+                  <button type="button" class="btn btn-primary" id="sim-play-btn">
+                    <i data-lucide="play" style="width:18px;height:18px;"></i>
+                    <span>Play Bunyi Era</span>
+                  </button>
+                  <button type="button" class="btn btn-secondary" id="sim-reset-btn">
+                    <i data-lucide="rotate-ccw" style="width:18px;height:18px;"></i>
+                    <span>Reset Parameter</span>
+                  </button>
+                </div>
+
+                <div class="slider-row">
+                  <label for="sim-tempo">
+                    <span>Tempo Permainan (BPM)</span>
+                    <span id="sim-tempo-val">${tempo} BPM</span>
+                  </label>
+                  <input type="range" id="sim-tempo" min="50" max="180" value="${tempo}" />
+                </div>
+
+                <div class="slider-row">
+                  <label for="sim-comp">
+                    <span>Kompleksitas Tekstur & Harmoni</span>
+                    <span id="sim-comp-val">${complexity}%</span>
+                  </label>
+                  <input type="range" id="sim-comp" min="10" max="100" value="${complexity}" />
+                </div>
+              </div>
+
+              <div>
+                <div style="padding:1rem;border-radius:16px;background:var(--surface-2);border:1px solid var(--border);">
+                  <span class="badge" id="sim-era-year">${SIMULATION_ERAS[0].tahun}</span>
+                  <h2 id="sim-era-title" style="font-size:1.25rem;font-weight:800;margin-top:0.5rem;">${SIMULATION_ERAS[0].nama}</h2>
+                  <p id="sim-era-desc" style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem;">${SIMULATION_ERAS[0].deskripsi}</p>
+
+                  <div class="metric-grid">
+                    <div class="metric-box">
+                      <span>Tekstur Dominan</span>
+                      <strong id="sim-m-tekstur">${SIMULATION_ERAS[0].tekstur}</strong>
+                    </div>
+                    <div class="metric-box">
+                      <span>Instrumen Kunci</span>
+                      <strong id="sim-m-instrumen">${SIMULATION_ERAS[0].instrumen}</strong>
+                    </div>
+                    <div class="metric-box">
+                      <span>Sistem Tangga Nada</span>
+                      <strong id="sim-m-harmoni">${SIMULATION_ERAS[0].harmoni}</strong>
+                    </div>
+                    <div class="metric-box">
+                      <span>Indeks Densitas Bunyi</span>
+                      <strong id="sim-m-densitas">1.35 Harmonik</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="context-box" style="margin-top:1rem;">
+                  <strong>Panduan Eksplorasi & Analisis:</strong>
+                  <p style="margin-top:0.3rem;font-size:0.88rem;">
+                    Coba pilih <strong>Abad Pertengahan</strong> lalu geser Kompleksitas ke <strong>15%</strong>, kemudian bandingkan dengan <strong>Era Romantik</strong> pada Kompleksitas <strong>85%</strong> dan Tempo <strong>140 BPM</strong>.
+                  </p>
+                  <ol style="margin-left:1.15rem;margin-top:0.45rem;font-size:0.86rem;display:flex;flex-direction:column;gap:0.3rem;">
+                    <li>Bagaimana perubahan bentuk gelombang pada layar saat kompleksitas tekstur dinaikkan?</li>
+                    <li>Mengapa karakter gelombang <strong>Modern/Kontemporer</strong> tampak lebih tajam dan tidak beraturan dibanding <strong>Era Klasik</strong>?</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const canvas = document.getElementById("sim-canvas");
+      const ctx2d = canvas.getContext("2d");
+
+      function updateMetrics() {
+        const era = SIMULATION_ERAS[selectedEraIdx];
+        document.getElementById("sim-era-year").textContent = era.tahun;
+        document.getElementById("sim-era-title").textContent = era.nama;
+        document.getElementById("sim-era-desc").textContent = era.deskripsi;
+        document.getElementById("sim-m-tekstur").textContent = era.tekstur;
+        document.getElementById("sim-m-instrumen").textContent = era.instrumen;
+        document.getElementById("sim-m-harmoni").textContent = era.harmoni;
+        const density = ((tempo / 60) * (1 + complexity / 50)).toFixed(2);
+        document.getElementById("sim-m-densitas").textContent = `${density} Lapis/detik`;
+      }
+
+      function drawWave() {
+        if (!document.getElementById("sim-canvas")) return;
+        const era = SIMULATION_ERAS[selectedEraIdx];
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx2d.clearRect(0, 0, w, h);
+
+        // Grid latar belakang
+        ctx2d.strokeStyle = "rgba(45, 212, 191, 0.12)";
+        ctx2d.lineWidth = 1;
+        for (let x = 0; x < w; x += 40) {
+          ctx2d.beginPath(); ctx2d.moveTo(x, 0); ctx2d.lineTo(x, h); ctx2d.stroke();
+        }
+        for (let y = 0; y < h; y += 40) {
+          ctx2d.beginPath(); ctx2d.moveTo(0, y); ctx2d.lineTo(w, y); ctx2d.stroke();
+        }
+
+        // Gelombang utama & harmonik
+        const layers = Math.max(1, Math.ceil(complexity / 25));
+        for (let l = 0; l < layers; l++) {
+          ctx2d.beginPath();
+          ctx2d.strokeStyle = l === 0 ? era.warna : l % 2 === 1 ? "#818cf8" : "#f9a8d4";
+          ctx2d.lineWidth = l === 0 ? 3 : 1.6;
+          ctx2d.globalAlpha = l === 0 ? 1 : 0.65;
+
+          for (let x = 0; x <= w; x += 3) {
+            const normX = x / w;
+            const freqFactor = (l + 1) * (era.id === "modern" ? 5.2 : 3.2);
+            const amp = (h * 0.28) / (l * 0.75 + 1) * (0.5 + complexity / 160);
+            let yVal = Math.sin(normX * Math.PI * 2 * freqFactor + phase * (l + 1) * 0.7);
+            if (era.id === "modern") {
+              yVal += 0.45 * Math.cos(normX * 27 - phase * 1.6);
+            } else if (era.id === "barok") {
+              yVal += 0.25 * Math.sin(normX * 18 + phase);
+            }
+            const y = h / 2 + yVal * amp;
+            if (x === 0) ctx2d.moveTo(x, y);
+            else ctx2d.lineTo(x, y);
+          }
+          ctx2d.stroke();
+        }
+        ctx2d.globalAlpha = 1;
+
+        if (isPlaying) {
+          phase += (tempo / 1000) * 1.4;
+        }
+        animFrameId = requestAnimationFrame(drawWave);
+      }
+
+      drawWave();
+
+      // Event selector era
+      container.querySelectorAll("[data-era-idx]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          sound.click();
+          selectedEraIdx = Number(btn.dataset.eraIdx);
+          container.querySelectorAll("[data-era-idx]").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const era = SIMULATION_ERAS[selectedEraIdx];
+          tempo = era.tempoDefault;
+          complexity = era.kompleksitasDefault;
+          document.getElementById("sim-tempo").value = tempo;
+          document.getElementById("sim-tempo-val").textContent = `${tempo} BPM`;
+          document.getElementById("sim-comp").value = complexity;
+          document.getElementById("sim-comp-val").textContent = `${complexity}%`;
+          updateMetrics();
+
+          if (isPlaying) {
+            sound.startEraLoop(() => ({ playing: isPlaying, era: SIMULATION_ERAS[selectedEraIdx], tempo, complexity }));
+          }
+        });
+      });
+
+      document.getElementById("sim-tempo").addEventListener("input", (e) => {
+        tempo = Number(e.target.value);
+        document.getElementById("sim-tempo-val").textContent = `${tempo} BPM`;
+        updateMetrics();
+      });
+
+      document.getElementById("sim-comp").addEventListener("input", (e) => {
+        complexity = Number(e.target.value);
+        document.getElementById("sim-comp-val").textContent = `${complexity}%`;
+        updateMetrics();
+      });
+
+      const playBtn = document.getElementById("sim-play-btn");
+      playBtn.addEventListener("click", () => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          playBtn.innerHTML = `<i data-lucide="pause" style="width:18px;height:18px;"></i><span>Pause Simulasi</span>`;
+          sound.startEraLoop(() => ({ playing: isPlaying, era: SIMULATION_ERAS[selectedEraIdx], tempo, complexity }));
+        } else {
+          playBtn.innerHTML = `<i data-lucide="play" style="width:18px;height:18px;"></i><span>Play Bunyi Era</span>`;
+          sound.stopEraLoop();
+        }
+        refreshIcons();
+      });
+
+      document.getElementById("sim-reset-btn").addEventListener("click", () => {
+        sound.click();
+        isPlaying = false;
+        sound.stopEraLoop();
+        selectedEraIdx = 0;
+        tempo = SIMULATION_ERAS[0].tempoDefault;
+        complexity = SIMULATION_ERAS[0].kompleksitasDefault;
+        renderSimulasi(container);
+        refreshIcons();
+      });
+    }
+
+    /* 7. KUIS INTERAKTIF (10 SOAL CAMPURAN + ACAK + PEMBAHASAN) */
+    function renderKuis(container) {
+      // Salin & acak urutan soal serta opsi pilihan ganda
+      let questions = shuffleArray(KUIS_QUESTIONS.map((q) => {
+        if (q.type === "pg") {
+          const indexed = q.options.map((opt, idx) => ({ opt, isCorrect: idx === q.answer }));
+          const shuffled = shuffleArray(indexed);
+          return {
+            ...q,
+            options: shuffled.map((s) => s.opt),
+            answer: shuffled.findIndex((s) => s.isCorrect)
+          };
+        }
+        return { ...q };
+      }));
+
+      let currentIdx = 0;
+      let score = 0;
+      let answered = false;
+
+      function renderQuestion() {
+        if (currentIdx >= questions.length) {
+          const finalScore = Math.round((score / questions.length) * 100);
+          if (state.quizBestScore === null || finalScore > state.quizBestScore) {
+            state.quizBestScore = finalScore;
+          }
+          saveState();
+          sound.win();
+
+          container.innerHTML = `
+            <div class="view-section">
+              <div class="card" style="text-align:center;max-width:620px;margin:0 auto;">
+                <span class="badge" style="margin-bottom:0.75rem;">Kuis Selesai</span>
+                <h1 style="font-size:2rem;font-weight:800;">Skor Akhir Kamu: ${finalScore}</h1>
+                <p style="color:var(--muted);margin:0.5rem 0 1.25rem;">
+                  Kamu menjawab benar <strong>${score}</strong> dari <strong>${questions.length}</strong> soal latihan (Seluruh soal mengukur <strong>TP1</strong>).
+                </p>
+                <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
+                  <button type="button" class="btn btn-secondary" id="btn-retry-quiz">
+                    <i data-lucide="refresh-cw" style="width:18px;height:18px;"></i>
+                    <span>Ulangi Kuis (Acak Soal)</span>
+                  </button>
+                  <button type="button" class="btn btn-primary" data-route="game">
+                    <span>Lanjut ke Zona Game</span>
+                    <i data-lucide="gamepad-2" style="width:18px;height:18px;"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+          refreshIcons();
+          document.getElementById("btn-retry-quiz").addEventListener("click", () => {
+            sound.click();
+            renderKuis(container);
+            refreshIcons();
+          });
+          return;
+        }
+
+        const q = questions[currentIdx];
+        const pct = Math.round(((currentIdx) / questions.length) * 100);
+        answered = false;
+
+        container.innerHTML = `
+          <div class="view-section">
+            <div class="page-header">
+              <div class="page-title-group">
+                <span class="badge" style="margin-bottom:0.4rem;">Latihan Formatif · ${q.tp}</span>
+                <h1>Kuis Interaktif Sejarah Musik Barat</h1>
+                <p>Soal ${currentIdx + 1} dari ${questions.length} · Skor Sementara: ${Math.round((score / questions.length) * 100)}</p>
+              </div>
+              <div style="width:200px;">
+                <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+              </div>
+            </div>
+
+            <div class="card" style="max-width:780px;margin:0 auto;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+                <span class="badge badge-secondary">${q.type === "pg" ? "Pilihan Ganda" : q.type === "bs" ? "Benar / Salah" : "Isian Singkat"}</span>
+                <span class="badge">${q.tp}</span>
+              </div>
+
+              <h2 style="font-size:1.15rem;font-weight:700;line-height:1.55;">${q.question}</h2>
+
+              <div id="quiz-interaction-area">
+                ${q.type === "isian" ? `
+                  <div style="display:flex;gap:0.65rem;margin-top:1.15rem;flex-wrap:wrap;">
+                    <input type="text" id="quiz-text-input" class="cover-input" style="text-align:left;flex:1;min-width:220px;" placeholder="${q.placeholder}" />
+                    <button type="button" class="btn btn-primary" id="quiz-submit-text">Cek Jawaban</button>
+                  </div>
+                ` : `
+                  <div class="option-list">
+                    ${q.options.map((opt, idx) => `
+                      <button type="button" class="option-btn" data-opt-idx="${idx}">
+                        <strong style="color:var(--primary-text);">${String.fromCharCode(65 + idx)}.</strong>
+                        <span>${opt}</span>
+                      </button>
+                    `).join("")}
+                  </div>
+                `}
+              </div>
+
+              <div id="quiz-feedback-slot"></div>
+            </div>
+          </div>
+        `;
+        refreshIcons();
+
+        function showFeedback(isCorrect, userText = "") {
+          if (answered) return;
+          answered = true;
+          if (isCorrect) {
+            score++;
+            sound.correct();
+          } else {
+            sound.wrong();
+          }
+
+          const slot = document.getElementById("quiz-feedback-slot");
+          slot.innerHTML = `
+            <div class="feedback-banner ${isCorrect ? "ok" : "no"}">
+              <strong>${isCorrect ? "Tepat Sekali!" : "Belum Tepat."}</strong>
+              <p style="margin-top:0.3rem;">${q.explanation}</p>
+              <div style="margin-top:0.85rem;text-align:right;">
+                <button type="button" class="btn btn-primary" id="btn-next-quiz-q">
+                  <span>${currentIdx < questions.length - 1 ? "Soal Berikutnya" : "Lihat Skor Akhir"}</span>
+                  <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                </button>
+              </div>
+            </div>
+          `;
+          refreshIcons();
+          document.getElementById("btn-next-quiz-q").addEventListener("click", () => {
+            sound.click();
+            currentIdx++;
+            renderQuestion();
+          });
+        }
+
+        if (q.type === "isian") {
+          const inputEl = document.getElementById("quiz-text-input");
+          const submitBtn = document.getElementById("quiz-submit-text");
+          const checkText = () => {
+            if (answered) return;
+            const val = inputEl.value.trim().toLowerCase();
+            if (!val) return;
+            inputEl.disabled = true;
+            submitBtn.disabled = true;
+            const ok = q.acceptedAnswers.some((ans) => val === ans || val.includes(ans));
+            showFeedback(ok);
+          };
+          submitBtn.addEventListener("click", checkText);
+          inputEl.addEventListener("keydown", (e) => { if (e.key === "Enter") checkText(); });
+        } else {
+          container.querySelectorAll("[data-opt-idx]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              if (answered) return;
+              const chosen = Number(btn.dataset.optIdx);
+              const isCorrect = chosen === q.answer;
+              container.querySelectorAll("[data-opt-idx]").forEach((b, i) => {
+                b.disabled = true;
+                if (i === q.answer) b.classList.add("correct");
+                else if (i === chosen && !isCorrect) b.classList.add("wrong");
+              });
+              showFeedback(isCorrect);
+            });
+          });
+        }
+      }
+
+      renderQuestion();
+    }
+
+    /* 8. ZONA GAME (DUEL 2 PEMAIN & TEBAK KATA) */
+    let activeGameKeyHandler = null;
+
+    function renderGame(container) {
+      if (activeGameKeyHandler) {
+        window.removeEventListener("keydown", activeGameKeyHandler);
+        activeGameKeyHandler = null;
+      }
+
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">Belajar Sambil Bermain (Joyful Learning)</span>
+              <h1>Zona Game Sejarah Musik Barat</h1>
+              <p>Pilih mode permainan untuk menguji kecepatan dan ketepatan kosakata musik Baratmu.</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-route="asesmen">
+              <span>Lanjut ke Asesmen Sumatif</span>
+              <i data-lucide="award" style="width:18px;height:18px;"></i>
+            </button>
+          </div>
+
+          <div id="game-hub-area" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.5rem;">
+            <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+                  <div class="bento-icon"><i data-lucide="swords"></i></div>
+                  <span class="badge">10 Ronde · 2 Pemain</span>
+                </div>
+                <h2 style="font-size:1.3rem;font-weight:800;">Duel 2 Pemain (Split Screen)</h2>
+                <p style="color:var(--muted);font-size:0.92rem;margin:0.5rem 0 1rem;">
+                  Adu cepat bersama teman sebangkumu di satu perangkat! Pemain 1 memakai tombol <strong>A / S / D / F</strong> (atau tap sisi kiri), Pemain 2 memakai tombol <strong>J / K / L / ;</strong> (atau tap sisi kanan). Jawaban benar tercepat +10 poin, salah -5 poin.
+                </p>
+              </div>
+              <button type="button" class="btn btn-primary" id="start-duel-btn">
+                <i data-lucide="play" style="width:18px;height:18px;"></i>
+                <span>Mulai Duel 2 Pemain</span>
+              </button>
+            </div>
+
+            <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+                  <div class="bento-icon"><i data-lucide="type"></i></div>
+                  <span class="badge badge-secondary">Rekor: ${state.gameStats.tebakKataBest} Poin</span>
+                </div>
+                <h2 style="font-size:1.3rem;font-weight:800;">Tebak Kata Istilah Musik</h2>
+                <p style="color:var(--muted);font-size:0.92rem;margin:0.5rem 0 1rem;">
+                  Tebak 12 istilah penting dari Zaman Kuno hingga Modern berdasarkan petunjuk definisinya. Pilih huruf lewat keyboard virtual dengan <strong>5 nyawa</strong> setiap kata!
+                </p>
+              </div>
+              <button type="button" class="btn btn-primary" id="start-word-btn">
+                <i data-lucide="play" style="width:18px;height:18px;"></i>
+                <span>Mulai Tebak Kata</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("start-duel-btn").addEventListener("click", () => {
+        sound.click();
+        launchDuelGame(document.getElementById("game-hub-area"), container);
+      });
+
+      document.getElementById("start-word-btn").addEventListener("click", () => {
+        sound.click();
+        launchWordGame(document.getElementById("game-hub-area"), container);
+      });
+    }
+
+    function launchDuelGame(hubEl, rootContainer) {
+      const rounds = shuffleArray([...DUEL_QUESTIONS]);
+      let roundIdx = 0;
+      let p1Score = 0;
+      let p2Score = 0;
+      let locked = false;
+      const p1Keys = ["A", "S", "D", "F"];
+      const p2Keys = ["J", "K", "L", ";"];
+
+      function renderRound() {
+        if (roundIdx >= rounds.length) {
+          if (activeGameKeyHandler) {
+            window.removeEventListener("keydown", activeGameKeyHandler);
+            activeGameKeyHandler = null;
+          }
+          sound.win();
+          const winner = p1Score > p2Score ? "Pemain 1 Menang! 🏆" : p2Score > p1Score ? "Pemain 2 Menang! 🏆" : "Pertandingan Seri! 🤝";
+          hubEl.style.display = "block";
+          hubEl.innerHTML = `
+            <div class="card" style="text-align:center;max-width:600px;margin:0 auto;">
+              <span class="badge" style="margin-bottom:0.6rem;">Hasil Duel 10 Ronde</span>
+              <h2 style="font-size:1.9rem;font-weight:800;">${winner}</h2>
+              <div style="display:flex;justify-content:center;gap:2rem;margin:1.25rem 0;">
+                <div><div style="color:var(--muted);font-size:0.85rem;">Pemain 1</div><strong style="font-size:1.8rem;color:var(--primary-text);">${p1Score}</strong></div>
+                <div><div style="color:var(--muted);font-size:0.85rem;">Pemain 2</div><strong style="font-size:1.8rem;color:var(--accent);">${p2Score}</strong></div>
+              </div>
+              <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
+                <button type="button" class="btn btn-primary" id="duel-again">Main Lagi</button>
+                <button type="button" class="btn btn-secondary" id="duel-back">Kembali ke Pilihan Game</button>
+              </div>
+            </div>
+          `;
+          document.getElementById("duel-again").addEventListener("click", () => launchDuelGame(hubEl, rootContainer));
+          document.getElementById("duel-back").addEventListener("click", () => renderGame(rootContainer));
+          refreshIcons();
+          return;
+        }
+
+        locked = false;
+        const item = rounds[roundIdx];
+        hubEl.style.display = "block";
+        hubEl.innerHTML = `
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
+              <span class="badge">Ronde ${roundIdx + 1} / ${rounds.length}</span>
+              <button type="button" class="btn btn-secondary" id="duel-exit" style="min-height:36px;padding:0.35rem 0.85rem;font-size:0.82rem;">Keluar Game</button>
+            </div>
+
+            <div class="duel-arena">
+              <div class="player-panel player-1">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong>Pemain 1</strong>
+                  <span class="badge">Skor: ${p1Score}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                  ${item.opts.map((opt, idx) => `
+                    <button type="button" class="duel-key-btn" data-p="1" data-opt="${idx}">
+                      <span>${opt}</span>
+                      <span class="key-cap">${p1Keys[idx]}</span>
+                    </button>
+                  `).join("")}
+                </div>
+              </div>
+
+              <div class="card" style="display:flex;flex-direction:column;justify-content:center;text-align:center;background:var(--surface);">
+                <span class="badge badge-secondary" style="align-self:center;margin-bottom:0.75rem;">Pertanyaan Cepat</span>
+                <h3 style="font-size:1.15rem;font-weight:800;line-height:1.45;">${item.q}</h3>
+                <div id="duel-status" style="margin-top:1rem;font-weight:700;font-size:0.9rem;color:var(--primary-text);min-height:1.5rem;">
+                  Siapa tercepat menjawab benar?
+                </div>
+              </div>
+
+              <div class="player-panel player-2">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong>Pemain 2</strong>
+                  <span class="badge badge-secondary">Skor: ${p2Score}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                  ${item.opts.map((opt, idx) => `
+                    <button type="button" class="duel-key-btn" data-p="2" data-opt="${idx}">
+                      <span>${opt}</span>
+                      <span class="key-cap">${p2Keys[idx]}</span>
+                    </button>
+                  `).join("")}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        refreshIcons();
+
+        function handleAnswer(playerNum, optIdx) {
+          if (locked) return;
+          const statusEl = document.getElementById("duel-status");
+          if (optIdx === item.ans) {
+            locked = true;
+            sound.correct();
+            if (playerNum === 1) p1Score += 10;
+            else p2Score += 10;
+            statusEl.textContent = `Pemain ${playerNum} benar (+10)! Jawaban: ${item.opts[item.ans]}`;
+            setTimeout(() => {
+              roundIdx++;
+              renderRound();
+            }, 950);
+          } else {
+            sound.wrong();
+            if (playerNum === 1) p1Score = Math.max(0, p1Score - 5);
+            else p2Score = Math.max(0, p2Score - 5);
+            statusEl.textContent = `Pemain ${playerNum} salah (-5)! Kesempatan lawan!`;
+          }
+        }
+
+        hubEl.querySelectorAll("[data-p]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            handleAnswer(Number(btn.dataset.p), Number(btn.dataset.opt));
+          });
+        });
+
+        document.getElementById("duel-exit").addEventListener("click", () => renderGame(rootContainer));
+      }
+
+      if (activeGameKeyHandler) window.removeEventListener("keydown", activeGameKeyHandler);
+      activeGameKeyHandler = (e) => {
+        const key = e.key.toUpperCase();
+        const idx1 = p1Keys.indexOf(key);
+        const idx2 = p2Keys.indexOf(key);
+        if (idx1 !== -1) handleAnswerFromKey(1, idx1);
+        if (idx2 !== -1) handleAnswerFromKey(2, idx2);
+      };
+      function handleAnswerFromKey(p, opt) {
+        const btn = hubEl.querySelector(`[data-p="${p}"][data-opt="${opt}"]`);
+        if (btn) btn.click();
+      }
+      window.addEventListener("keydown", activeGameKeyHandler);
+
+      renderRound();
+    }
+
+    function launchWordGame(hubEl, rootContainer) {
+      const words = shuffleArray([...WORD_PUZZLES]);
+      let wordIdx = 0;
+      let totalPoints = 0;
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+      function startWord() {
+        if (wordIdx >= words.length) {
+          if (totalPoints > state.gameStats.tebakKataBest) {
+            state.gameStats.tebakKataBest = totalPoints;
+            saveState();
+          }
+          sound.win();
+          hubEl.style.display = "block";
+          hubEl.innerHTML = `
+            <div class="card" style="text-align:center;max-width:560px;margin:0 auto;">
+              <span class="badge" style="margin-bottom:0.6rem;">Tantangan Selesai</span>
+              <h2 style="font-size:1.8rem;font-weight:800;">Total Skor: ${totalPoints} Poin</h2>
+              <p style="color:var(--muted);margin:0.5rem 0 1.25rem;">Kamu telah menamatkan seluruh ${words.length} kata kunci sejarah musik Barat!</p>
+              <div style="display:flex;justify-content:center;gap:0.75rem;">
+                <button type="button" class="btn btn-primary" id="word-replay">Main Lagi</button>
+                <button type="button" class="btn btn-secondary" id="word-back">Pilih Game Lain</button>
+              </div>
+            </div>
+          `;
+          document.getElementById("word-replay").addEventListener("click", () => launchWordGame(hubEl, rootContainer));
+          document.getElementById("word-back").addEventListener("click", () => renderGame(rootContainer));
+          return;
+        }
+
+        const current = words[wordIdx];
+        const target = current.word.toUpperCase();
+        const guessed = new Set();
+        let lives = 5;
+
+        function renderBoard() {
+          const letters = target.split("");
+          const isSolved = letters.every((ch) => ch === " " || guessed.has(ch));
+          const isFailed = lives <= 0;
+
+          if (isSolved) {
+            totalPoints += lives * 10;
+            if (totalPoints > state.gameStats.tebakKataBest) {
+              state.gameStats.tebakKataBest = totalPoints;
+              saveState();
+            }
+            sound.correct();
+          } else if (isFailed) {
+            sound.wrong();
+          }
+
+          hubEl.style.display = "block";
+          hubEl.innerHTML = `
+            <div class="card" style="max-width:740px;margin:0 auto;text-align:center;">
+              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">
+                <span class="badge">Kata ${wordIdx + 1} / ${words.length}</span>
+                <span class="badge badge-secondary">Nyawa: ${"❤️".repeat(Math.max(0, lives))}${"🖤".repeat(Math.max(0, 5 - lives))}</span>
+                <span class="badge">Skor: ${totalPoints}</span>
+              </div>
+
+              <div class="context-box" style="text-align:left;">
+                <strong>Petunjuk Definisi:</strong>
+                <p style="margin-top:0.25rem;">${current.clue}</p>
+              </div>
+
+              <div class="word-slots">
+                ${letters.map((ch) => {
+                  if (ch === " ") return `<div class="letter-slot space"></div>`;
+                  const show = guessed.has(ch) || isFailed;
+                  return `<div class="letter-slot">${show ? ch : ""}</div>`;
+                }).join("")}
+              </div>
+
+              ${isSolved || isFailed ? `
+                <div class="feedback-banner ${isSolved ? "ok" : "no"}" style="margin-bottom:1rem;">
+                  <strong>${isSolved ? `Hebat! Kata "${target}" berhasil ditebak!` : `Nyawa habis! Kata yang benar adalah "${target}".`}</strong>
+                  <div style="margin-top:0.75rem;">
+                    <button type="button" class="btn btn-primary" id="next-word-btn">Kata Berikutnya</button>
+                  </div>
+                </div>
+              ` : `
+                <div class="v-keyboard">
+                  ${alphabet.map((ltr) => {
+                    const used = guessed.has(ltr);
+                    const cls = used ? (target.includes(ltr) ? "hit" : "miss") : "";
+                    return `<button type="button" class="v-key ${cls}" data-ltr="${ltr}" ${used ? "disabled" : ""}>${ltr}</button>`;
+                  }).join("")}
+                </div>
+              `}
+
+              <div style="margin-top:1.25rem;">
+                <button type="button" class="btn btn-secondary" id="exit-word-btn" style="min-height:38px;font-size:0.84rem;">Kembali ke Menu Game</button>
+              </div>
+            </div>
+          `;
+
+          hubEl.querySelectorAll("[data-ltr]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const ltr = btn.dataset.ltr;
+              if (guessed.has(ltr) || isSolved || isFailed) return;
+              guessed.add(ltr);
+              if (target.includes(ltr)) {
+                sound.click();
+              } else {
+                lives--;
+                sound.wrong();
+              }
+              renderBoard();
+            });
+          });
+
+          const nextBtn = document.getElementById("next-word-btn");
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              sound.click();
+              wordIdx++;
+              startWord();
+            });
+          }
+
+          document.getElementById("exit-word-btn").addEventListener("click", () => renderGame(rootContainer));
+        }
+
+        renderBoard();
+      }
+
+      startWord();
+    }
+
+    /* 9. ASESMEN SUMATIF (10 SOAL · TIMER 20 MENIT · NAVIGASI NOMOR · RAGU-RAGU · KKTP 75 · CETAK) */
+    let asesmenTimerInterval = null;
+
+    function renderAsesmen(container) {
+      if (asesmenTimerInterval) {
+        clearInterval(asesmenTimerInterval);
+        asesmenTimerInterval = null;
+      }
+
+      // Jika sudah ada hasil tersimpan, tampilkan laporan hasil beserta opsi ulangi
+      if (state.asesmenResult && !state.asesmenRetaking) {
+        renderAsesmenReport(container, state.asesmenResult);
+        return;
+      }
+
+      let currentIdx = 0;
+      let userAnswers = new Array(ASESMEN_QUESTIONS.length).fill(null);
+      let doubtFlags = new Array(ASESMEN_QUESTIONS.length).fill(false);
+      let secondsLeft = 20 * 60; // 20 menit
+
+      function finishAsesmen() {
+        if (asesmenTimerInterval) {
+          clearInterval(asesmenTimerInterval);
+          asesmenTimerInterval = null;
+        }
+        let correctCount = 0;
+        const details = ASESMEN_QUESTIONS.map((q, i) => {
+          const isOk = userAnswers[i] === q.answer;
+          if (isOk) correctCount++;
+          return {
+            id: q.id,
+            tp: q.tp,
+            level: q.level,
+            question: q.question,
+            userAnswerText: userAnswers[i] !== null ? q.options[userAnswers[i]] : "(Tidak dijawab)",
+            correctAnswerText: q.options[q.answer],
+            isCorrect: isOk,
+            explanation: q.explanation
+          };
+        });
+
+        const score = Math.round((correctCount / ASESMEN_QUESTIONS.length) * 100);
+        const resultObj = {
+          score,
+          correctCount,
+          total: ASESMEN_QUESTIONS.length,
+          passed: score >= MEDIA_IDENTITY.kktp,
+          timestamp: new Date().toLocaleString("id-ID"),
+          details
+        };
+
+        state.asesmenResult = resultObj;
+        state.asesmenRetaking = false;
+        saveState();
+        sound.win();
+        renderAsesmenReport(container, resultObj);
+      }
+
+      function renderExamScreen() {
+        const q = ASESMEN_QUESTIONS[currentIdx];
+        const mins = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
+        const secs = String(secondsLeft % 60).padStart(2, "0");
+
+        container.innerHTML = `
+          <div class="view-section">
+            <div class="page-header">
+              <div class="page-title-group">
+                <span class="badge" style="margin-bottom:0.4rem;">Evaluasi Akhir · KKTP ${MEDIA_IDENTITY.kktp}</span>
+                <h1>Asesmen Sumatif Sejarah Musik Barat</h1>
+                <p>Soal ${currentIdx + 1} dari ${ASESMEN_QUESTIONS.length} · ${q.level} · Kode ${q.tp}</p>
+              </div>
+              <div class="badge" id="asesmen-timer-badge" style="font-size:1rem;padding:0.5rem 1rem;">
+                <i data-lucide="clock" style="width:18px;height:18px;"></i>
+                <span id="asesmen-clock">${mins}:${secs}</span>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1.35fr 0.65fr;gap:1.25rem;align-items:start;" class="asesmen-grid">
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.85rem;flex-wrap:wrap;">
+                  <span class="badge badge-secondary">${q.level}</span>
+                  <span class="badge">${q.tp}</span>
+                </div>
+
+                <div class="context-box" style="margin-top:0;margin-bottom:1rem;">
+                  <strong>Stimulus Kontekstual:</strong>
+                  <p style="margin-top:0.25rem;white-space:pre-line;">${q.stimulus}</p>
+                </div>
+
+                <h2 style="font-size:1.1rem;font-weight:700;line-height:1.55;">${currentIdx + 1}. ${q.question}</h2>
+
+                <div class="option-list">
+                  ${q.options.map((opt, idx) => `
+                    <button type="button" class="option-btn ${userAnswers[currentIdx] === idx ? "selected" : ""}" data-ans-idx="${idx}">
+                      <strong style="color:var(--primary-text);">${String.fromCharCode(65 + idx)}.</strong>
+                      <span>${opt}</span>
+                    </button>
+                  `).join("")}
+                </div>
+
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:0.75rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);flex-wrap:wrap;">
+                  <button type="button" class="btn btn-secondary" id="as-prev" ${currentIdx === 0 ? "disabled style='opacity:0.45;'" : ""}>
+                    <i data-lucide="chevron-left" style="width:18px;height:18px;"></i>
+                    <span>Sebelumnya</span>
+                  </button>
+
+                  <button type="button" class="btn btn-secondary" id="as-doubt" style="${doubtFlags[currentIdx] ? "border-color:var(--warning);color:var(--warning);" : ""}">
+                    <i data-lucide="flag" style="width:16px;height:16px;"></i>
+                    <span>${doubtFlags[currentIdx] ? "Ditandai Ragu" : "Tandai Ragu-ragu"}</span>
+                  </button>
+
+                  ${currentIdx < ASESMEN_QUESTIONS.length - 1 ? `
+                    <button type="button" class="btn btn-primary" id="as-next">
+                      <span>Berikutnya</span>
+                      <i data-lucide="chevron-right" style="width:18px;height:18px;"></i>
+                    </button>
+                  ` : `
+                    <button type="button" class="btn btn-primary" id="as-finish-btn">
+                      <i data-lucide="send" style="width:16px;height:16px;"></i>
+                      <span>Kumpulkan Jawaban</span>
+                    </button>
+                  `}
+                </div>
+              </div>
+
+              <div class="card">
+                <h3 style="font-size:1rem;font-weight:800;margin-bottom:0.75rem;">Navigasi Nomor Soal</h3>
+                <div class="soal-nav-grid">
+                  ${ASESMEN_QUESTIONS.map((_, i) => {
+                    const cls = [
+                      "soal-num-btn",
+                      i === currentIdx ? "current" : "",
+                      doubtFlags[i] ? "doubt" : userAnswers[i] !== null ? "answered" : ""
+                    ].join(" ");
+                    return `<button type="button" class="${cls}" data-jump-as="${i}">${i + 1}</button>`;
+                  }).join("")}
+                </div>
+                <div style="margin-top:1rem;font-size:0.8rem;color:var(--muted);display:flex;flex-direction:column;gap:0.35rem;">
+                  <div>Hijau/Toska: Sudah dijawab (${userAnswers.filter((v) => v !== null).length}/10)</div>
+                  <div>Kuning: Ragu-ragu (${doubtFlags.filter(Boolean).length})</div>
+                </div>
+                <button type="button" class="btn btn-primary" id="as-submit-side" style="width:100%;margin-top:1.15rem;">
+                  <span>Selesai & Kumpulkan</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        refreshIcons();
+
+        container.querySelectorAll("[data-ans-idx]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            sound.click();
+            userAnswers[currentIdx] = Number(btn.dataset.ansIdx);
+            renderExamScreen();
+          });
+        });
+
+        document.getElementById("as-prev").addEventListener("click", () => {
+          if (currentIdx > 0) { sound.click(); currentIdx--; renderExamScreen(); }
+        });
+
+        document.getElementById("as-doubt").addEventListener("click", () => {
+          sound.click();
+          doubtFlags[currentIdx] = !doubtFlags[currentIdx];
+          renderExamScreen();
+        });
+
+        const nextBtn = document.getElementById("as-next");
+        if (nextBtn) {
+          nextBtn.addEventListener("click", () => {
+            sound.click();
+            currentIdx++;
+            renderExamScreen();
+          });
+        }
+
+        container.querySelectorAll("[data-jump-as]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            sound.click();
+            currentIdx = Number(btn.dataset.jumpAs);
+            renderExamScreen();
+          });
+        });
+
+        const openConfirm = () => {
+          sound.click();
+          const unanswered = userAnswers.filter((v) => v === null).length;
+          document.getElementById("confirm-desc").textContent =
+            unanswered > 0
+              ? `Masih ada ${unanswered} soal yang belum dijawab. Yakin ingin mengumpulkan sekarang?`
+              : "Semua 10 soal telah dijawab. Klik 'Ya, Kumpulkan' untuk melihat nilai dan pembahasan.";
+          const modal = document.getElementById("confirm-modal");
+          modal.classList.add("open");
+          document.getElementById("confirm-ok").onclick = () => {
+            modal.classList.remove("open");
+            finishAsesmen();
+          };
+          document.getElementById("confirm-cancel").onclick = () => {
+            modal.classList.remove("open");
+          };
+        };
+
+        const finBtn = document.getElementById("as-finish-btn");
+        if (finBtn) finBtn.addEventListener("click", openConfirm);
+        document.getElementById("as-submit-side").addEventListener("click", openConfirm);
+      }
+
+      asesmenTimerInterval = setInterval(() => {
+        secondsLeft--;
+        const clockEl = document.getElementById("asesmen-clock");
+        if (clockEl) {
+          const m = String(Math.floor(Math.max(0, secondsLeft) / 60)).padStart(2, "0");
+          const s = String(Math.max(0, secondsLeft) % 60).padStart(2, "0");
+          clockEl.textContent = `${m}:${s}`;
+        }
+        if (secondsLeft <= 0) {
+          finishAsesmen();
+        }
+      }, 1000);
+
+      renderExamScreen();
+    }
+
+    function renderAsesmenReport(container, res) {
+      const nama = state.studentName || "Siswa";
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header no-print">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">Laporan Hasil Asesmen Sumatif</span>
+              <h1>Hasil Evaluasi Belajar</h1>
+              <p>Peserta Didik: <strong>${escapeHTML(nama)}</strong> · Waktu Selesai: ${res.timestamp}</p>
+            </div>
+            <div style="display:flex;gap:0.65rem;flex-wrap:wrap;">
+              <button type="button" class="btn btn-secondary" id="btn-print-report">
+                <i data-lucide="printer" style="width:18px;height:18px;"></i>
+                <span>Cetak / Simpan PDF</span>
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-retake-asesmen">
+                <i data-lucide="refresh-cw" style="width:18px;height:18px;"></i>
+                <span>Ulangi Asesmen</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:1.5rem;border-top:5px solid ${res.passed ? "var(--success)" : "var(--warning)"};">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;text-align:center;">
+              <div style="padding:1rem;border-radius:14px;background:var(--surface-2);">
+                <div style="font-size:0.82rem;color:var(--muted);">Nilai Akhir</div>
+                <div style="font-size:2.4rem;font-weight:800;color:var(--primary-text);">${res.score}</div>
+              </div>
+              <div style="padding:1rem;border-radius:14px;background:var(--surface-2);">
+                <div style="font-size:0.82rem;color:var(--muted);">Status KKTP (${MEDIA_IDENTITY.kktp})</div>
+                <div style="font-size:1.35rem;font-weight:800;margin-top:0.45rem;color:${res.passed ? "var(--success)" : "var(--danger)"};">
+                  ${res.passed ? "TUNTAS" : "BELUM TUNTAS"}
+                </div>
+              </div>
+              <div style="padding:1rem;border-radius:14px;background:var(--surface-2);">
+                <div style="font-size:0.82rem;color:var(--muted);">Capaian TP1</div>
+                <div style="font-size:1.35rem;font-weight:800;margin-top:0.45rem;">${res.correctCount} / ${res.total} Benar</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:1rem;">Rincian Jawaban & Pembahasan Lengkap</h2>
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              ${res.details.map((d, i) => `
+                <div style="padding:1rem 1.15rem;border-radius:16px;background:var(--surface-2);border-left:4px solid ${d.isCorrect ? "var(--success)" : "var(--danger)"};">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.4rem;flex-wrap:wrap;">
+                    <strong>Soal ${i + 1} (${d.tp} · ${d.level})</strong>
+                    <span class="badge" style="color:${d.isCorrect ? "var(--success)" : "var(--danger)"};">
+                      ${d.isCorrect ? "Benar" : "Salah"}
+                    </span>
+                  </div>
+                  <p style="font-size:0.93rem;margin-bottom:0.5rem;">${d.question}</p>
+                  <p style="font-size:0.86rem;"><strong>Jawaban Kamu:</strong> ${escapeHTML(d.userAnswerText)}</p>
+                  ${!d.isCorrect ? `<p style="font-size:0.86rem;color:var(--success);"><strong>Kunci Jawaban:</strong> ${escapeHTML(d.correctAnswerText)}</p>` : ""}
+                  <p style="font-size:0.86rem;color:var(--muted);margin-top:0.4rem;"><strong>Pembahasan:</strong> ${d.explanation}</p>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+      refreshIcons();
+
+      document.getElementById("btn-print-report").addEventListener("click", () => {
+        sound.click();
+        window.print();
+      });
+
+      document.getElementById("btn-retake-asesmen").addEventListener("click", () => {
+        sound.click();
+        state.asesmenRetaking = true;
+        renderAsesmen(container);
+      });
+    }
+
+    /* 10. RANGKUMAN MATERI */
+    function renderRangkuman(container) {
+      const eraSummary = [
+        { era: "1. Musik Kuno (< 476 M)", poin: "Berkembang sebelum runtuhnya Kekaisaran Romawi. Berfungsi untuk ritual keagamaan, puisi, dan drama Yunani-Romawi menggunakan lira dan aulos." },
+        { era: "2. Abad Pertengahan (476–1572 M)", poin: "Musik Sakral berupa Plainchant/Musik Gregorian (monofoni vokal Latin tanpa iringan, modus gerejawi, S. Gregorius Agung, S. Hildegard, G. de Machaut) dan Musik Sekuler (Troubadours, Trouvères, Minnesinger; lagu Alba, Pastourelle, Estampie)." },
+        { era: "3. Era Renaisans (1400–1600 M)", poin: "Bermakna 'Kelahiran Kembali' dan zaman Humanisme dari Italia. Musik vokal polifonik dominan, tema meluas ke kehidupan & gereja Protestan, muncul pengelompokan brass, percussion, woodwind, strings (Palestrina, William Byrd, Orlando de Lassus)." },
+        { era: "4. Era Barok & Rokoko (1600–1750 M)", poin: "Agung dan dramatik (Opera, Oratorio, Sonata, Concerto). Memakai Harpsichord, kontras forte-piano, tangga nada mayor-minor awal, ornamen spontan (Barok) vs tertulis (Rokoko). Tokoh: Vivaldi, Handel, Purcell." },
+        { era: "5. Era Klasik (1750–1820 M)", poin: "Masa Pencerahan; musik terbuka untuk rakyat. Tekstur homofoni di atas akord 3 nada, keseimbangan bentuk, dinamika crescendo-decrescendo, serta pemakaian Piano (Beethoven, Haydn, Schubert)." },
+        { era: "6. Era Romantik (1815–1910 M)", poin: "Mengutamakan kebebasan ekspresi emosi dan imajinasi. Orkestra berukuran raksasa, harmoni kromatik, pemain virtuoso piano/biola, dan ending spektakuler (Beethoven Symphony No. 9, Brahms)." },
+        { era: "7. Musik Modern / Kontemporer (1900–Sekarang)", poin: "Sikap emansipatif bebas aturan tonal dan birama. Gaya Impresionisme, Ekspresionisme, Eksperimental; memakai pentatonik, teknologi audiovisual, serta kolaborasi dengan instrumen etnis (gamelan, angklung, kolintang, sasando, talempong)." }
+      ];
+
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">Intisari Pembelajaran</span>
+              <h1>Rangkuman Perjalanan Musik Barat</h1>
+              <p>Ringkasan padat 7 periode perkembangan musik Barat dari Zaman Kuno sampai Modern.</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-route="beranda">
+              <i data-lucide="layout-grid" style="width:18px;height:18px;"></i>
+              <span>Kembali ke Menu Bento</span>
+            </button>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.15rem;">
+            ${eraSummary.map((item) => `
+              <div class="card" style="border-top:4px solid var(--primary);">
+                <h2 style="font-size:1.1rem;font-weight:800;color:var(--primary-text);margin-bottom:0.5rem;">${item.era}</h2>
+                <p style="font-size:0.92rem;color:var(--text);line-height:1.6;">${item.poin}</p>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    /* 11. PROFIL PENGEMBANG */
+    function renderProfil(container) {
+      container.innerHTML = `
+        <div class="view-section">
+          <div class="page-header">
+            <div class="page-title-group">
+              <span class="badge" style="margin-bottom:0.4rem;">Identitas Penyusun Media</span>
+              <h1>Profil Pengembang</h1>
+              <p>Informasi guru penyusun dan satuan pendidikan pengembang media pembelajaran.</p>
+            </div>
+          </div>
+
+          <div class="card" style="max-width:720px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1.75rem;align-items:center;">
+            <div style="width:110px;height:110px;border-radius:26px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:var(--on-primary);display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;flex-shrink:0;box-shadow:var(--glow-primary);">
+              AS
+            </div>
+
+            <div style="flex:1;min-width:250px;">
+              <span class="badge" style="margin-bottom:0.5rem;">Guru Mata Pelajaran Seni Budaya</span>
+              <h2 style="font-size:1.5rem;font-weight:800;">${MEDIA_IDENTITY.penyusun}</h2>
+              <p style="font-size:1rem;font-weight:600;color:var(--primary-text);margin-top:0.2rem;">${MEDIA_IDENTITY.sekolah}</p>
+
+              <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.45rem;font-size:0.92rem;color:var(--muted);">
+                <div><i data-lucide="book" style="width:16px;height:16px;vertical-align:middle;margin-right:0.4rem;"></i> <strong>Mata Pelajaran:</strong> ${MEDIA_IDENTITY.mapel} (${MEDIA_IDENTITY.fase})</div>
+                <div><i data-lucide="layers" style="width:16px;height:16px;vertical-align:middle;margin-right:0.4rem;"></i> <strong>Materi Pokok:</strong> ${MEDIA_IDENTITY.materiPokok} — ${MEDIA_IDENTITY.subMateri}</div>
+                <div><i data-lucide="map-pin" style="width:16px;height:16px;vertical-align:middle;margin-right:0.4rem;"></i> <strong>Lokasi Sekolah:</strong> Kabanjahe, Kabupaten Karo, Sumatera Utara</div>
+                <div><i data-lucide="mail" style="width:16px;height:16px;vertical-align:middle;margin-right:0.4rem;"></i> <strong>Kontak Akademik:</strong> senibudaya@smasantamariakabanjahe.sch.id</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ========================================================================
+       BAGIAN G: ONBOARDING TUR SINGKAT & UTILITAS
+       ======================================================================== */
+    function startOnboardingTour() {
+      const steps = [
+        {
+          badge: "Langkah 1 dari 3",
+          title: "Navigasi Bento Grid & Bilah Cepat",
+          desc: "Pilih kotak mana saja pada layar Beranda Bento Grid untuk membuka Materi, Video, Simulasi, Kuis, Game, hingga Asesmen Sumatif."
+        },
+        {
+          badge: "Langkah 2 dari 3",
+          title: "Eksplorasi Materi & Simulasi Bunyi",
+          desc: "Pada menu Materi terdapat 8 slide kronologi sejarah musik Barat. Di menu Simulasi, kamu bisa memutar dan mengamati gelombang bunyi tiap era."
+        },
+        {
+          badge: "Langkah 3 dari 3",
+          title: "Progres & Skor Tersimpan Otomatis",
+          desc: "Pantau indikator progres di bagian atas. Semua nilai kuis dan asesmen sumatifmu tersimpan otomatis dan dapat dicetak."
+        }
+      ];
+
+      let stepIdx = 0;
+      const modal = document.getElementById("onboarding-modal");
+      const badgeEl = document.getElementById("onboard-step-badge");
+      const titleEl = document.getElementById("onboard-title");
+      const descEl = document.getElementById("onboard-desc");
+      const nextBtn = document.getElementById("onboard-next");
+      const skipBtn = document.getElementById("onboard-skip");
+
+      function showStep() {
+        const s = steps[stepIdx];
+        badgeEl.textContent = s.badge;
+        titleEl.textContent = s.title;
+        descEl.textContent = s.desc;
+        nextBtn.textContent = stepIdx === steps.length - 1 ? "Mulai Eksplorasi" : "Lanjut";
+      }
+
+      showStep();
+      modal.classList.add("open");
+
+      nextBtn.onclick = () => {
+        sound.click();
+        if (stepIdx < steps.length - 1) {
+          stepIdx++;
+          showStep();
+        } else {
+          state.onboardingDone = true;
+          saveState();
+          modal.classList.remove("open");
+        }
+      };
+
+      skipBtn.onclick = () => {
+        sound.click();
+        state.onboardingDone = true;
+        saveState();
+        modal.classList.remove("open");
+      };
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function escapeHTML(str) {
+      return String(str)
+        .replace(/&/g, "&")
+        .replace(/</g, "<")
+        .replace(/>/g, ">")
+        .replace(/"/g, """);
+    }
+
+    /* ========================================================================
+       BAGIAN H: INISIALISASI EVENT LISTENER GLOBAL
+       ======================================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      // Terapkan tema dan preferensi suara tersimpan
+      applyTheme(state.theme);
+      applySoundUI();
+      updateGlobalProgressUI();
+
+      // Isi nama jika sudah tersimpan sebelumnya
+      const nameInput = document.getElementById("student-name-input");
+      if (state.studentName && nameInput) {
+        nameInput.value = state.studentName;
+      }
+
+      // Toggle Tema di Cover & Header
+      ["cover-theme-toggle", "app-theme-toggle"].forEach((id) => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.addEventListener("click", () => {
+            sound.click();
+            applyTheme(state.theme === "dark" ? "light" : "dark");
+          });
+        }
+      });
+
+      // Toggle Suara di Cover & Header
+      ["cover-sound-toggle", "app-sound-toggle"].forEach((id) => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.addEventListener("click", () => {
+            state.soundEnabled = !state.soundEnabled;
+            applySoundUI();
+            if (state.soundEnabled) sound.click();
+          });
+        }
+      });
+
+      // Slider Volume
+      const volSlider = document.getElementById("volume-slider");
+      if (volSlider) {
+        volSlider.addEventListener("input", (e) => {
+          state.volume = Number(e.target.value);
+          state.soundEnabled = state.volume > 0;
+          applySoundUI();
+        });
+      }
+
+      // Submit Form Cover ("Mulai Belajar")
+      const startForm = document.getElementById("start-form");
+      const errorMsg = document.getElementById("cover-error-msg");
+
+      startForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const val = nameInput.value.trim();
+        if (!val) {
+          errorMsg.textContent = "Silakan isi nama lengkapmu terlebih dahulu sebelum memulai ya!";
+          nameInput.focus();
+          return;
+        }
+        errorMsg.textContent = "";
+        state.studentName = val;
+        state.soundEnabled = true; // Suara aktif sejak menekan tombol Mulai
+        sound.unlock();
+        sound.win();
+        applySoundUI();
+        saveState();
+
+        document.getElementById("header-student-greeting").textContent = `Halo, ${val}`;
+        document.getElementById("cover-screen").classList.add("hidden");
+        document.getElementById("app-shell").classList.add("active");
+
+        navigateTo("beranda", false);
+
+        if (!state.onboardingDone) {
+          setTimeout(startOnboardingTour, 450);
+        }
+      });
+
+      // Delegasi klik tombol navigasi [data-route] di seluruh halaman
+      document.body.addEventListener("click", (e) => {
+        const routeBtn = e.target.closest("[data-route]");
+        if (routeBtn) {
+          const targetRoute = routeBtn.dataset.route;
+          navigateTo(targetRoute, true);
+        }
+      });
+
+      // Dukungan tombol panah keyboard (← / →) khusus pada halaman Materi
+      window.addEventListener("keydown", (e) => {
+        if (state.activeRoute !== "materi") return;
+        if (document.activeElement && ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
+        if (e.key === "ArrowRight") {
+          const nextBtn = document.getElementById("btn-next-slide");
+          if (nextBtn) nextBtn.click();
+        } else if (e.key === "ArrowLeft") {
+          const prevBtn = document.getElementById("btn-prev-slide");
+          if (prevBtn) prevBtn.click();
+        }
+      });
+
+      refreshIcons();
+    });
+  </script>
+</body>
+</html>
